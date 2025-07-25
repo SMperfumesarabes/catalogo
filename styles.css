@@ -90,6 +90,7 @@ header {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
     padding: 15px 0;
     transition: var(--transition);
+    height: 80px;
 }
 
 .header-container {
@@ -97,17 +98,20 @@ header {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    height: 100%;
 }
 
 .mobile-header-left {
     display: flex;
     align-items: center;
     gap: 15px;
+    height: 100%;
 }
 
 .logo-link {
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .logo-img {
@@ -443,8 +447,24 @@ nav ul li a:hover::after {
 .product-price {
     font-size: 20px;
     font-weight: 600;
-    color: var(--gold);
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+.current-price {
+    color: var(--gold);
+    font-weight: 600;
 }
 
 .policies {
@@ -957,7 +977,7 @@ footer {
     
     nav {
         position: fixed;
-        top: 80px;
+        top: 100%;
         left: 0;
         width: 100%;
         background: var(--white);
@@ -965,6 +985,7 @@ footer {
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         transform: translateY(-150%);
         transition: var(--transition);
+        z-index: 999;
     }
     
     nav.active {
@@ -986,71 +1007,40 @@ footer {
 
 @media (max-width: 768px) {
     body {
-        padding-top: 70px;
-        position: relative;
-        overflow-x: hidden;
+        padding-top: 60px;
     }
 
     header {
+        height: 60px;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         z-index: 2000;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-        animation: none !important;
-        transform: none !important;
-        transition: none !important;
+        padding: 10px 0;
     }
 
     .app-container {
         padding-top: 0;
-        margin-top: 70px;
+        margin-top: 60px;
     }
 
     .header-container {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0;
+        height: 60px;
+        padding: 0 15px;
     }
 
     .mobile-header-left {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex: 1;
-    }
-
-    .menu-toggle {
-        display: block;
-        order: 1;
-        font-size: 24px;
-        margin-left: 20px;
+        height: 100%;
     }
 
     .logo-link {
-        order: 2;
-        flex-grow: 1;
-        text-align: center;
+        height: 100%;
     }
 
     .logo-img {
-        height: 50px;
-        width: auto;
-        max-width: 150px;
-    }
-
-    .cart-icon {
-        order: 3;
-        display: flex !important;
-        font-size: 20px;
-        margin-right: 30px;
-    }
-
-    nav {
-        top: 70px;
+        height: 35px;
     }
 
     .hero {
@@ -1152,7 +1142,7 @@ footer {
     }
 
     .logo-img {
-        height: 40px;
+        height: 35px;
     }
     
     nav {

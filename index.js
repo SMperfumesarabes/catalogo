@@ -104,7 +104,14 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', (e) => {
             const productCard = e.target.closest('.product-card');
             const productName = productCard.querySelector('h3').textContent;
-            const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace(/[^0-9.]/g, ''));
+            
+            // Tomar el precio actual (con descuento si existe)
+            let priceElement = productCard.querySelector('.current-price');
+            if (!priceElement) {
+                priceElement = productCard.querySelector('.product-price');
+            }
+            const productPrice = parseFloat(priceElement.textContent.replace(/[^0-9.]/g, ''));
+            
             const productImage = productCard.querySelector('img').src;
             
             const existingItem = cart.find(item => item.name === productName);
