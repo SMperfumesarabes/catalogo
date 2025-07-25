@@ -14,20 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let cart = [];
 
-    // Función para asegurar visibilidad del carrito
     function ensureCartVisibility() {
         if (window.innerWidth <= 768) {
             cartIcon.style.display = 'flex';
-            cartIcon.style.visibility = 'visible';
-            cartIcon.style.opacity = '1';
         }
     }
 
-    // Verificar al cargar y al redimensionar
     ensureCartVisibility();
     window.addEventListener('resize', ensureCartVisibility);
 
-    // Navegación entre secciones
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -48,12 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Menú hamburguesa
     menuToggle.addEventListener('click', () => {
         nav.classList.toggle('active');
     });
 
-    // Click en logo
     logoLink.addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -69,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Botón explorar colección
     document.getElementById('explore-btn').addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -85,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Filtros de productos
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -94,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Funcionalidad del carrito
     cartIcon.addEventListener('click', () => {
         cartModal.classList.add('active');
     });
