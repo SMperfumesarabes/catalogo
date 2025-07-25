@@ -4,7 +4,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
     const logoLink = document.querySelector('.logo-link');
+    const cartIcon = document.querySelector('.cart-icon');
+    const closeCart = document.querySelector('.close-cart');
+    const cartModal = document.querySelector('.cart-modal');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartSubtotal = document.getElementById('cart-subtotal');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCount = document.querySelector('.cart-count');
+    
+    let cart = [];
 
+    // Función para asegurar visibilidad del carrito
+    function ensureCartVisibility() {
+        if (window.innerWidth <= 768) {
+            cartIcon.style.display = 'flex';
+            cartIcon.style.visibility = 'visible';
+            cartIcon.style.opacity = '1';
+        }
+    }
+
+    // Verificar al cargar y al redimensionar
+    ensureCartVisibility();
+    window.addEventListener('resize', ensureCartVisibility);
+
+    // Navegación entre secciones
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -25,10 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Menú hamburguesa
     menuToggle.addEventListener('click', () => {
         nav.classList.toggle('active');
     });
 
+    // Click en logo
     logoLink.addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -44,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Botón explorar colección
     document.getElementById('explore-btn').addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -59,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Filtros de productos
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -67,16 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const cartIcon = document.querySelector('.cart-icon');
-    const closeCart = document.querySelector('.close-cart');
-    const cartModal = document.querySelector('.cart-modal');
-    const cartItemsContainer = document.querySelector('.cart-items');
-    const cartSubtotal = document.getElementById('cart-subtotal');
-    const cartTotal = document.getElementById('cart-total');
-    const cartCount = document.querySelector('.cart-count');
-    
-    let cart = [];
-    
+    // Funcionalidad del carrito
     cartIcon.addEventListener('click', () => {
         cartModal.classList.add('active');
     });
@@ -93,15 +111,26 @@ document.addEventListener('DOMContentLoaded', function() {
             const productPrice = parseFloat(productCard.querySelector('.product-price').textContent.replace(/[^0-9.]/g, ''));
             const productImage = productCard.querySelector('img').src;
             
-            cart.push({
-                name: productName,
-                price: productPrice,
-                image: productImage,
-                quantity: 1
-            });
+            const existingItem = cart.find(item => item.name === productName);
+            
+            if(existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                });
+            }
             
             updateCart();
             cartModal.classList.add('active');
+            
+            cartIcon.classList.add('pulse');
+            setTimeout(() => {
+                cartIcon.classList.remove('pulse');
+            }, 500);
         });
     });
     
@@ -109,6 +138,14 @@ document.addEventListener('DOMContentLoaded', function() {
         cartItemsContainer.innerHTML = '';
         
         let subtotal = 0;
+        
+        if(cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
+            cartSubtotal.textContent = '$0.00 MXN';
+            cartTotal.textContent = '$0.00 MXN';
+            cartCount.textContent = '0';
+            return;
+        }
         
         cart.forEach((item, index) => {
             subtotal += item.price * item.quantity;
@@ -216,10 +253,8 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
         if (window.scrollY > 100) {
-            header.style.padding = '10px 0';
             header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
         } else {
-            header.style.padding = '15px 0';
             header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.05)';
         }
     });
@@ -229,4 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
         e.target.reset();
     });
+
+    updateCart();
 });
