@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Navegación entre pantallas
     const navLinks = document.querySelectorAll('.nav-link');
     const screens = document.querySelectorAll('.screen');
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
     const logoLink = document.querySelector('.logo-link');
 
-    // Funcionalidad del menú de navegación
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -27,12 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Toggle del menú móvil
     menuToggle.addEventListener('click', () => {
         nav.classList.toggle('active');
     });
 
-    // Logo redirige al inicio
     logoLink.addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -48,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Botón "Explorar Colección"
     document.getElementById('explore-btn').addEventListener('click', (e) => {
         e.preventDefault();
         
@@ -64,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Filtros de productos
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -73,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Carrito de compras
     const cartIcon = document.querySelector('.cart-icon');
     const closeCart = document.querySelector('.close-cart');
     const cartModal = document.querySelector('.cart-modal');
@@ -181,7 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cartModal.classList.remove('active');
     });
 
-    // Contador de cuenta regresiva
     function updateCountdown() {
         const daysElement = document.getElementById('days');
         const hoursElement = document.getElementById('hours');
@@ -221,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateCountdown();
 
-    // Efecto de scroll en el header
     window.addEventListener('scroll', function() {
         const header = document.querySelector('header');
         if (window.scrollY > 100) {
@@ -233,62 +224,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Formulario de contacto
     document.querySelector('.contact-form form').addEventListener('submit', (e) => {
         e.preventDefault();
         alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
         e.target.reset();
     });
-
-    // Ajustes responsive para móvil
-    function setupMobileLayout() {
-        const socialLinks = document.querySelector('.social-links');
-        if (window.innerWidth <= 768) {
-            // Centrar redes sociales
-            if (socialLinks) {
-                socialLinks.style.justifyContent = 'center';
-            }
-            
-            // Reorganizar elementos del header
-            const headerContainer = document.querySelector('.header-container');
-            if (headerContainer) {
-                headerContainer.style.flexWrap = 'wrap';
-                headerContainer.style.justifyContent = 'space-between';
-            }
-            
-            const mobileHeaderLeft = document.createElement('div');
-            mobileHeaderLeft.className = 'mobile-header-left';
-            
-            const menuToggle = document.querySelector('.menu-toggle');
-            const logoLink = document.querySelector('.logo-link');
-            const cartIcon = document.querySelector('.cart-icon');
-            const headerRight = document.querySelector('.header-right');
-            
-            if (menuToggle && logoLink && cartIcon && headerRight) {
-                // Mover elementos al nuevo contenedor
-                mobileHeaderLeft.appendChild(menuToggle);
-                mobileHeaderLeft.appendChild(logoLink);
-                mobileHeaderLeft.appendChild(cartIcon);
-                
-                // Insertar el nuevo contenedor
-                headerContainer.insertBefore(mobileHeaderLeft, headerRight);
-                
-                // Estilos para el layout móvil
-                mobileHeaderLeft.style.display = 'flex';
-                mobileHeaderLeft.style.alignItems = 'center';
-                mobileHeaderLeft.style.width = '100%';
-                mobileHeaderLeft.style.justifyContent = 'space-between';
-                mobileHeaderLeft.style.marginBottom = '15px';
-                
-                cartIcon.style.order = '1';
-                logoLink.style.order = '0';
-                menuToggle.style.order = '-1';
-                menuToggle.style.marginRight = '15px';
-            }
-        }
-    }
-
-    // Ejecutar al cargar y al redimensionar
-    setupMobileLayout();
-    window.addEventListener('resize', setupMobileLayout);
 });

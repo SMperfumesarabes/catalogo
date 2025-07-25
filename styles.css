@@ -22,6 +22,7 @@ body {
     background: var(--white);
     overflow-x: hidden;
     line-height: 1.6;
+    overscroll-behavior: none;
 }
 
 h1, h2, h3, h4 {
@@ -94,6 +95,8 @@ header {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
     padding: 15px 0;
     transition: var(--transition);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .header-container {
@@ -1019,7 +1022,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    /* Header fijo optimizado */
     header {
         position: fixed;
         top: 0;
@@ -1031,11 +1033,14 @@ footer {
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         padding: 10px 0;
         transition: none;
+        transform: translateZ(0);
+        will-change: transform;
+        backface-visibility: hidden;
     }
 
-    /* Compensación de espacio mejorada */
     body {
         padding-top: 80px !important;
+        overscroll-behavior: none;
     }
     
     .app-container {
@@ -1044,10 +1049,10 @@ footer {
         padding-top: 0;
     }
 
-    /* Estructura del header */
     .header-container {
-        display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding: 0 15px;
         width: 100%;
         margin: 0 auto;
@@ -1086,18 +1091,16 @@ footer {
     }
 
     .header-right {
-        display: none; /* Ocultar elementos no esenciales en móvil */
+        display: none;
     }
 
-    /* Ajuste para el contenido principal */
     .hero {
         margin-top: 20px;
         padding-top: 0;
     }
 
-    /* Menú móvil (si aplica) */
     nav {
-        top: 80px !important; /* Ajustar según altura del header */
+        top: 80px !important;
     }
     
     .social-links {
