@@ -50,16 +50,22 @@ document.addEventListener('DOMContentLoaded', function() {
     logoLink.addEventListener('click', (e) => {
         e.preventDefault();
         
-        navLinks.forEach(l => l.classList.remove('nav-active'));
-        document.querySelector('[data-target="home"]').classList.add('nav-active');
+        const homeScreen = document.getElementById('home');
         
-        screens.forEach(screen => {
-            screen.classList.remove('active');
-            if(screen.id === 'home') {
-                screen.classList.add('active');
-                window.scrollTo(0, 0);
-            }
-        });
+        if (homeScreen.classList.contains('active')) {
+            window.location.reload();
+        } else {
+            navLinks.forEach(l => l.classList.remove('nav-active'));
+            document.querySelector('[data-target="home"]').classList.add('nav-active');
+            
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+                if(screen.id === 'home') {
+                    screen.classList.add('active');
+                    window.scrollTo(0, 0);
+                }
+            });
+        }
     });
 
     document.getElementById('explore-btn').addEventListener('click', (e) => {
