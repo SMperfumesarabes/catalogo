@@ -449,7 +449,7 @@ nav ul li a:hover::after {
 
 .policies {
     padding: 40px 0 100px;
-    background: var(--light-gray);
+    background: var(--white);
 }
 
 .policies-grid {
@@ -1027,6 +1027,7 @@ footer {
         display: block;
         order: 1;
         font-size: 24px;
+        margin-left: 20px;
     }
 
     .logo-link {
@@ -1045,6 +1046,7 @@ footer {
         order: 3;
         display: flex !important;
         font-size: 20px;
+        margin-right: 30px;
     }
 
     nav {
@@ -1126,7 +1128,7 @@ footer {
     }
     
     .section-title {
-        margin-top: 10px;
+        margin-top: -70px;
         margin-bottom: 40px;
     }
     
