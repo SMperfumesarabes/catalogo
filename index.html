@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumes Árabes - Fragancias de Lujo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="container header-container">
+                <div class="mobile-header-left">
+                    <div class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <a href="#" class="logo-link">
+                        <img src="img/Logo.png" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link nav-active" data-target="home">Inicio</a></li>
+                        <li><a href="#" class="nav-link" data-target="perfumes">Perfumes Árabes</a></li>
+                        <li><a href="#" class="nav-link" data-target="decant">Decant</a></li>
+                        <li><a href="#" class="nav-link" data-target="policies">Nuestras Políticas</a></li>
+                        <li><a href="#" class="nav-link" data-target="promotions">Promociones</a></li>
+                        <li><a href="#" class="nav-link" data-target="contact">Contacto</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="screen active" id="home">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="animate-fade-in">El arte de las fragancias Árabes</h1>
+                        <p class="animate-fade-in">Descubre nuestra exclusiva colección de perfumes árabes, elaborados con los ingredientes más finos para capturar momentos inolvidables con elegancia atemporal.</p>
+                        <a href="#" class="btn animate-fade-in" id="explore-btn">Explorar Colección</a>
+                    </div>
+                </div>
+                <div class="hero-image" style="background-image: url('img/banner.png')"></div>
+            </section>
+
+            <section class="perfumes">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 class="animate-fade-in">Colección Destacada</h2>
+                        <p class="animate-fade-in">Fragancias únicas elaboradas con las esencias más finas y atención meticulosa al detalle.</p>
+                    </div>
+                    <div class="products-grid">
+                        <div class="product-card animate-slide-up" data-name="Lattafa Raghba for Men">
+                            <div class="product-badge">Nuevo</div>
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x400?text=Perfume+Arab" alt="Lattafa Raghba for Men">
+                                <div class="product-actions">
+                                    <div class="action-btn"><i class="fas fa-heart"></i></div>
+                                    <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
+                                    <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <span class="product-category">Hombre</span>
+                                <h3>Lattafa Raghba for Men</h3>
+                                <div class="product-price">$<span class="current-price">1,850</span> MXN</div>
+                                <a href="#" class="btn view-detail">Ver Detalles</a>
+                            </div>
+                        </div>
+                        <div class="product-card animate-slide-up" data-name="Lattafa Yara">
+                            <div class="product-badge">Más vendido</div>
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x400?text=Perfume+Arab" alt="Lattafa Yara">
+                                <div class="product-actions">
+                                    <div class="action-btn"><i class="fas fa-heart"></i></div>
+                                    <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
+                                    <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <span class="product-category">Mujer</span>
+                                <h3>Lattafa Yara</h3>
+                                <div class="product-price">$<span class="current-price">1,650</span> MXN</div>
+                                <a href="#" class="btn view-detail">Ver Detalles</a>
+                            </div>
+                        </div>
+                        <div class="product-card animate-slide-up" data-name="Swiss Arabian Shaghaf Oud">
+                            <div class="product-badge">Exclusivo</div>
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x400?text=Perfume+Arab" alt="Swiss Arabian Shaghaf Oud">
+                                <div class="product-actions">
+                                    <div class="action-btn"><i class="fas fa-heart"></i></div>
+                                    <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
+                                    <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <span class="product-category">Unisex</span>
+                                <h3>Swiss Arabian Shaghaf Oud</h3>
+                                <div class="product-price">$<span class="current-price">2,100</span> MXN</div>
+                                <a href="#" class="btn view-detail">Ver Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="screen" id="perfumes">
+            <section class="perfumes">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 class="animate-fade-in">Perfumes Árabes</h2>
+                        <p class="animate-fade-in">Descubre nuestra exclusiva colección de fragancias árabes, diseñadas para capturar la esencia de la tradición oriental.</p>
+                    </div>
+                    
+                    <div class="search-bar">
+                        <input type="text" id="search-input" placeholder="Buscar perfumes...">
+                    </div>
+                    
+                    <div class="filter-bar">
+                        <button class="filter-btn active" data-category="all">Todos</button>
+                        <button class="filter-btn" data-category="man">Hombre</button>
+                        <button class="filter-btn" data-category="woman">Mujer</button>
+                        <button class="filter-btn" data-category="unisex">Unisex</button>
+                    </div>
+                    
+                    <div class="products-grid" id="perfumes-grid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="screen" id="decant">
+            <section class="perfumes">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 class="animate-fade-in">Decant - Fragancias en 30ml</h2>
+                        <p class="animate-fade-in">Disfruta de nuestras fragancias premium en formato de 30ml con atomizador moderno.</p>
+                    </div>
+                    
+                    <div class="products-grid" id="decant-grid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="screen" id="policies">
+            <section class="policies">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 class="animate-fade-in">Nuestras Políticas</h2>
+                        <p class="animate-fade-in">Comprometidos con la excelencia en cada detalle de tu experiencia de compra.</p>
+                    </div>
+                    
+                    <div class="policies-grid">
+                        <div class="policy-card animate-slide-up">
+                            <div class="policy-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3>Garantía de Calidad</h3>
+                            <p>Todos nuestros perfumes son 100% originales y de la más alta calidad. Los mejores aceites esenciales.</p>
+                            <a href="#" class="btn btn-outline">Saber más</a>
+                        </div>
+                        
+                        <div class="policy-card animate-slide-up">
+                            <div class="policy-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <h3>Durabilidad del Olor</h3>
+                            <p> Te garantizamos la durabilidad de tu perfume. En "Ver Detalle" puedes ver la durabilidad de cada uno.</p>
+                            <a href="#" class="btn btn-outline">Saber más</a>
+                        </div>
+                        
+                        <div class="policy-card animate-slide-up">
+                            <div class="policy-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Certificación</h3>
+                            <p>Todos nuestros productos cuentan con certificación de autenticidad, garantizando su origen y calidad.</p>
+                            <a href="#" class="btn btn-outline">Saber más</a>
+                        </div>
+                        
+                        <div class="policy-card animate-slide-up">
+                            <div class="policy-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h3>Envío Seguro</h3>
+                            <p>Envíos gratuitos a todo México en compras mayores a $1,000 MXN. Envíos rápidos y seguros para proteger tu compra.</p>
+                            <a href="#" class="btn btn-outline">Saber más</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="screen" id="promotions">
+            <section class="promotions">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 class="animate-fade-in">Promociones Exclusivas</h2>
+                        <p class="animate-fade-in">Aprovecha nuestras ofertas especiales en fragancias seleccionadas.</p>
+                    </div>
+                    
+                    <div class="promo-card">
+                        <div class="promo-image" style="background-image: url('img/promo.png')"></div>
+                        <div class="promo-content">
+                            <h2 class="animate-fade-in">Colección Verano</h2>
+                            <p class="animate-fade-in">Hasta 25% de descuento en nuestra exclusiva colección de verano. Fragancias cálidas y envolventes, perfectas para esta temporada.</p>
+                            
+                            <div class="promo-text">
+                                Promoción válida hasta el 30 de Junio
+                            </div>
+                            
+                            <a href="#" class="btn animate-fade-in" id="view-collection-btn">Ver Colección</a>
+                        </div>
+                    </div>
+                    
+                    <div class="products-grid" style="margin-top: 80px;" id="promotions-grid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="screen" id="contact">
+            <section class="contact">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 class="animate-fade-in">Contáctanos</h2>
+                        <p class="animate-fade-in">Estamos aquí para ayudarte a encontrar la fragancia perfecta.</p>
+                    </div>
+                    
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <div class="contact-item animate-slide-up">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Perfumes Árabes</h4>
+                                    <p>AMICI CONCEPT STORE Av Gaspar Luken Escalante 790, Residencial San Marcos, Puerta Real, 83177 Hermosillo, Son.</p>
+                                    <a href="https://maps.app.goo.gl/VdmMPXbKfxz5T4zs7" target="_blank">Ver en Google Maps</a>
+                                </div>
+                            </div>
+                            <div class="contact-item animate-slide-up">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Horario</h4>
+                                    <p>Lunes a Sábado: 10:00 - 21:00<br>Domingo: 10:00 - 20:00</p>
+                                </div>
+                            </div>
+                            <div class="contact-item animate-slide-up">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Contacto</h4>
+                                    <p>+52 662 138 3780<br>contacto@perfumesarabes.com</p>
+                                    <a href="https://wa.me/526621383780" target="_blank">Enviar mensaje por WhatsApp</a>
+                                </div>
+                            </div>
+                            <div class="contact-item animate-slide-up">
+                                <div class="contact-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Citas Privadas</h4>
+                                    <p>Disfruta de una experiencia de compra personalizada en nuestro salón VIP con atención exclusiva.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-form animate-fade-in">
+                            <h3>Agenda una Cita Privada</h3>
+                            <p>Completa el formulario y nos pondremos en contacto contigo.</p>
+                            <div class="form-spacing"></div>
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">Nombre Completo</label>
+                                    <input type="text" id="name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Correo Electrónico</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Teléfono</label>
+                                    <input type="tel" id="phone" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Fecha Preferida</label>
+                                    <input type="date" id="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Interés Especial</label>
+                                    <textarea id="message" class="form-control" required></textarea>
+                                </div>
+                                <button type="submit" class="btn">Solicitar Cita</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container animate-slide-up">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3485.4453385064357!2d-111.0349186244812!3d29.122052275401035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86ce81a26e6b1531%3A0xdaa8fdc3f05143d1!2sAMICI%20CONCEPT%20STORE!5e0!3m2!1sen!2smx!4v1754241472250!5m2!1sen!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="screen" id="product-detail">
+            <section class="product-detail">
+                <div class="container">
+                    <button class="btn btn-outline back-to-products"><i class="fas fa-arrow-left"></i> Volver</button>
+                    <div class="detail-container" id="detail-content"></div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-logo">
+                        <img src="img/logo2.png" alt="Logo" style="height: 50px;">
+                    </div>
+                    <div class="footer-about">
+                        <p>Comercializando fragancias excepcionales desde 2024. Cada perfume es un testimonio de artesanía, tradición y excelencia en el diseño olfativo. Descubre el lujo de la perfumería árabe con nuestra colección exclusiva.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/sm.perfumesarabes" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/526621383780" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <div class="copyright">
+                        &copy; 2025 Perfumes Árabes. Todos los derechos reservados.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="cart-modal">
+            <div class="cart-header">
+                <h3>Tu Carrito</h3>
+                <button class="close-cart"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="cart-items">
+            </div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00 MXN</span>
+                </div>
+                <div class="summary-row">
+                    <span>Envío</span>
+                    <span id="shipping-fee">Gratis</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>Total</span>
+                    <span id="cart-total">$0.00 MXN</span>
+                </div>
+                <button class="btn checkout-btn">Proceder al Pago</button>
+            </div>
+        </div>
+
+        <a href="https://wa.me/526621383780" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
