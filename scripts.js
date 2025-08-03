@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const detailContainer = document.getElementById('detail-content');
     const backToProducts = document.querySelector('.back-to-products');
     const viewCollectionBtn = document.getElementById('view-collection-btn');
+    const policyLinks = document.querySelectorAll('.policy-link');
     
     let cart = [];
 
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Raghba for Men",
             category: "Hombre",
             price: 1850,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-raghba-men.jpg",
             description: "Fragancia oriental amaderada con notas de oud, vainilla y azúcar quemada. Perfecta para eventos nocturnos y ocasiones especiales.",
             tones: ["Oud", "Vainilla", "Azúcar quemada", "Ámbar", "Maderas"],
             topNotes: ["Azafrán", "Pimienta"],
@@ -108,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Fakhar Black",
             category: "Hombre",
             price: 1650,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-fakhar-black.jpg",
             description: "Elegante fragancia con un toque fresco de bergamota combinada con notas cálidas de ámbar y madera de cedro.",
             tones: ["Bergamota", "Ámbar", "Cedro", "Musk", "Vetiver"],
             topNotes: ["Bergamota", "Lavanda"],
@@ -118,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Rasasi Hawas for Him",
             category: "Hombre",
             price: 2100,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/rasasi-hawas-him.jpg",
             description: "Fragancia acuática con notas frescas de manzana y cardamomo, perfecta para el uso diario.",
             tones: ["Manzana", "Cardamomo", "Ámbar", "Maderas", "Musk"],
             topNotes: ["Manzana", "Cardamomo"],
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Ajmal Kuro",
             category: "Hombre",
             price: 1950,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/ajmal-kuro.jpg",
             description: "Fragancia intensa con notas especiadas y amaderadas, ideal para hombres que buscan una presencia impactante.",
             tones: ["Pimienta", "Lavanda", "Vetiver", "Ámbar", "Cuero"],
             topNotes: ["Pimienta negra", "Lavanda"],
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Ard Al Zaafaran Dirham Oud",
             category: "Hombre",
             price: 2200,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/ard-al-zaafaran-oud.jpg",
             description: "Lujosa fragancia con notas de oud y especias orientales, para el hombre sofisticado.",
             tones: ["Oud", "Azafrán", "Rosa", "Ámbar", "Maderas"],
             topNotes: ["Azafrán", "Pimienta"],
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Asad",
             category: "Hombre",
             price: 1750,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-asad.jpg",
             description: "Fragancia especiada con notas de pimienta y lavanda, con un fondo amaderado y ámbrado.",
             tones: ["Pimienta", "Lavanda", "Vainilla", "Ámbar", "Maderas"],
             topNotes: ["Pimienta", "Lavanda"],
@@ -158,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Rasasi La Yuqawam Pour Homme",
             category: "Hombre",
             price: 2400,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/rasasi-la-yuqawam.jpg",
             description: "Fragancia de cuero y frutas con un toque de frescura cítrica y profundidad amaderada.",
             tones: ["Frambuesa", "Pera", "Azafrán", "Cuero", "Vetiver"],
             topNotes: ["Frambuesa", "Peras"],
@@ -168,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Ajmal Dahn Al Oudh Al Shams",
             category: "Hombre",
             price: 2600,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/ajmal-dahn-al-oudh.jpg",
             description: "Fragancia premium con oud de alta calidad y notas florales, para ocasiones especiales.",
             tones: ["Oud", "Rosa", "Azafrán", "Ámbar", "Maderas"],
             topNotes: ["Azafrán", "Rosa"],
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Afnan Supremacy Silver",
             category: "Hombre",
             price: 2300,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/afnan-supremacy-silver.jpg",
             description: "Fragancia amaderada y especiada con un toque fresco de bergamota y notas cálidas de ámbar.",
             tones: ["Bergamota", "Pimienta", "Vetiver", "Ámbar", "Maderas"],
             topNotes: ["Bergamota", "Pimienta"],
@@ -188,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Qaed Al Fursan",
             category: "Hombre",
             price: 1800,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-qaed-al-fursan.jpg",
             description: "Fragancia fresca y frutal con notas de piña y manzana, ideal para el día a día.",
             tones: ["Piña", "Manzana", "Musk", "Ámbar", "Maderas"],
             topNotes: ["Piña", "Manzana"],
@@ -198,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Yara",
             category: "Mujer",
             price: 1650,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-yara.jpg",
             description: "Fragancia floral y frutal con notas de frutos rojos y flores blancas, femenina y elegante.",
             tones: ["Frutas rojas", "Fresia", "Vainilla", "Almizcle", "Sándalo"],
             topNotes: ["Frutas rojas", "Fresia"],
@@ -208,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Raghba for Women",
             category: "Mujer",
             price: 1750,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-raghba-women.jpg",
             description: "Fragancia oriental cálida con notas de vainilla y oud, perfecta para noches especiales.",
             tones: ["Vainilla", "Oud", "Ámbar", "Almizcle", "Sándalo"],
             topNotes: ["Vainilla", "Oud"],
@@ -218,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Rasasi Hawas for Her",
             category: "Mujer",
             price: 1900,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/rasasi-hawas-her.jpg",
             description: "Fragancia floral acuática con notas de peonía y lirio de los valles, fresca y femenina.",
             tones: ["Peonía", "Lirio", "Almizcle", "Ámbar", "Maderas"],
             topNotes: ["Peonía", "Lirio"],
@@ -228,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Ajmal Wisal Dhahab",
             category: "Mujer",
             price: 2200,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/ajmal-wisal-dhahab.jpg",
             description: "Fragancia floral intensa con notas de rosa y jazmín, con un toque dorado de azafrán.",
             tones: ["Rosa", "Jazmín", "Azafrán", "Ámbar", "Maderas"],
             topNotes: ["Rosa", "Jazmín"],
@@ -238,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Fakhar Rose",
             category: "Mujer",
             price: 1700,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-fakhar-rose.jpg",
             description: "Fragancia floral con notas de rosa y frutas, elegante y sofisticada.",
             tones: ["Rosa", "Frambuesa", "Vainilla", "Ámbar", "Musk"],
             topNotes: ["Rosa", "Frambuesa"],
@@ -248,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Ard Al Zaafaran Dirham Wardi",
             category: "Mujer",
             price: 2000,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/ard-al-zaafaran-wardi.jpg",
             description: "Fragancia floral oriental con notas de rosa y oud, con un toque de dulzura.",
             tones: ["Rosa", "Oud", "Vainilla", "Ámbar", "Maderas"],
             topNotes: ["Rosa", "Oud"],
@@ -258,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Ajmal Sacrifice for Her",
             category: "Mujer",
             price: 2300,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/ajmal-sacrifice-her.jpg",
             description: "Fragancia floral intensa con notas de jazmín y gardenia, con un fondo amaderado.",
             tones: ["Jazmín", "Gardenia", "Vainilla", "Sándalo", "Ámbar"],
             topNotes: ["Jazmín", "Gardenia"],
@@ -268,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Rasasi Rumz Al Rasasi 9453 Femme",
             category: "Mujer",
             price: 2100,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/rasasi-rumz-femme.jpg",
             description: "Fragancia floral frutal con notas de pera y peonía, fresca y moderna.",
             tones: ["Pera", "Peonía", "Almizcle", "Vainilla", "Maderas"],
             topNotes: ["Pera", "Peonía"],
@@ -278,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Emaan",
             category: "Mujer",
             price: 1800,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-emaan.jpg",
             description: "Fragancia floral con notas de jazmín y lirio, delicada y femenina.",
             tones: ["Jazmín", "Lirio", "Vainilla", "Ámbar", "Musk"],
             topNotes: ["Jazmín", "Lirio"],
@@ -288,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Khaltat Al Arabia Royal Blends",
             category: "Mujer",
             price: 2500,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/khaltat-al-arabia.jpg",
             description: "Fragancia floral intensa con notas de rosa y azafrán, con un toque de dulzura.",
             tones: ["Rosa", "Azafrán", "Vainilla", "Ámbar", "Musk"],
             topNotes: ["Rosa", "Azafrán"],
@@ -298,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Swiss Arabian Shaghaf Oud",
             category: "Unisex",
             price: 2100,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/swiss-arabian-shaghaf.jpg",
             description: "Fragancia oriental con notas de oud y rosas, intensa y sofisticada.",
             tones: ["Oud", "Rosas", "Azafrán", "Ámbar", "Maderas"],
             topNotes: ["Oud", "Rosas"],
@@ -308,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Ajmal Amber Wood",
             category: "Unisex",
             price: 1950,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/ajmal-amber-wood.jpg",
             description: "Fragancia amaderada con notas de ámbar y pachulí, cálida y envolvente.",
             tones: ["Ámbar", "Pachulí", "Vetiver", "Musk", "Sándalo"],
             topNotes: ["Ámbar", "Pachulí"],
@@ -318,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Lattafa Oud Mood",
             category: "Unisex",
             price: 1800,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/lattafa-oud-mood.jpg",
             description: "Fragancia de oud con notas especiadas y florales, misteriosa y atractiva.",
             tones: ["Oud", "Azafrán", "Rosa", "Vainilla", "Maderas"],
             topNotes: ["Oud", "Azafrán"],
@@ -328,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
             name: "Rasasi La Yuqawam Ambergris Showers",
             category: "Unisex",
             price: 2300,
-            image: "https://via.placeholder.com/300x400?text=Perfume+Arab",
+            image: "./img/rasasi-ambergris.jpg",
             description: "Fragancia acuática con notas de ámbar gris y maderas, fresca y duradera.",
             tones: ["Ámbar gris", "Maderas", "Musk", "Vetiver", "Algas"],
             topNotes: ["Ámbar gris", "Maderas"],
@@ -553,7 +554,6 @@ document.addEventListener('DOMContentLoaded', function() {
             cartItemsContainer.appendChild(cartItem);
         });
         
-        // Calcular envío
         const shippingCost = subtotal >= 1000 ? 0 : 150;
         const total = subtotal + shippingCost;
         
@@ -627,7 +627,6 @@ document.addEventListener('DOMContentLoaded', function() {
         renderDecant();
         renderPromotions();
         
-        // Event delegation for product actions
         document.addEventListener('click', handleProductAction);
 
         document.querySelectorAll('.filter-btn').forEach(button => {
@@ -675,6 +674,32 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
             e.target.reset();
+        });
+
+        policyLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const policy = link.getAttribute('data-policy');
+                let message = "Hola! Quisiera saber más acerca de su política de ";
+                
+                switch(policy) {
+                    case 'garantia':
+                        message += "Garantía de Calidad";
+                        break;
+                    case 'durabilidad':
+                        message += "Durabilidad del Olor";
+                        break;
+                    case 'certificacion':
+                        message += "Certificación";
+                        break;
+                    case 'envio':
+                        message += "Envío Seguro";
+                        break;
+                }
+                
+                const whatsappUrl = `https://wa.me/526621383780?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
         });
 
         window.addEventListener('scroll', function() {

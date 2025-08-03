@@ -294,14 +294,12 @@ nav ul li a:hover::after {
 }
 
 .perfumes {
-    padding: 40px 0 100px;
-    margin-bottom: 30px;
+    padding: 80px 0;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 50px;
-    margin-top: 10px;
+    margin-bottom: 60px;
 }
 
 .section-title h2 {
@@ -414,6 +412,7 @@ nav ul li a:hover::after {
     max-width: 80%;
     max-height: 80%;
     transition: transform 0.5s ease;
+    object-fit: contain;
 }
 
 .product-card:hover .product-image img {
@@ -510,7 +509,7 @@ nav ul li a:hover::after {
 }
 
 .policies {
-    padding: 40px 0 100px;
+    padding: 80px 0;
     background: var(--white);
 }
 
@@ -559,7 +558,7 @@ nav ul li a:hover::after {
 }
 
 .promotions {
-    padding: 40px 0 100px;
+    padding: 80px 0;
 }
 
 .promo-card {
@@ -613,7 +612,7 @@ nav ul li a:hover::after {
 }
 
 .contact {
-    padding: 40px 0 100px;
+    padding: 80px 0;
 }
 
 .contact-container {
@@ -1004,6 +1003,7 @@ footer {
     max-height: 100%;
     transition: transform 0.3s ease;
     cursor: zoom-in;
+    object-fit: contain;
 }
 
 .detail-image.zoomed {
@@ -1117,7 +1117,7 @@ footer {
     
     nav {
         position: fixed;
-        top: 100%;
+        top: 80px;
         left: 0;
         width: 100%;
         background: var(--white);
@@ -1134,10 +1134,19 @@ footer {
     
     nav ul {
         flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
     }
     
     nav ul li {
-        margin: 15px 0;
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 10px 0;
+        font-size: 16px;
     }
     
     .cart-modal {
@@ -1159,14 +1168,18 @@ footer {
         z-index: 2000;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
         padding: 10px 0;
-        padding-bottom: 40px; /* Más espacio en la parte inferior del header */
+        padding-bottom: 40px;
+    }
+
+    nav {
+        top: 60px;
     }
 
     .app-container {
         padding-top: 0;
         margin-top: 60px;
         margin-bottom: 20px;
-        background-color: var(--light-gray); /* Fondo gris claro en móvil */
+        background-color: var(--light-gray);
     }
 
     .header-container {
@@ -1225,8 +1238,7 @@ footer {
     }
     
     .policies {
-        padding: 60px 0 90px;
-        padding-top: 50px; /* Más espacio arriba de "Nuestras Políticas" */
+        padding: 80px 0;
     }
     
     .promotions {
@@ -1277,53 +1289,21 @@ footer {
     }
 
     .product-detail {
-        padding: 20px 0; /* Reducir espacio en la sección de detalle en móvil */
+        padding: 20px 0;
     }
 
     .back-to-products {
-        margin-top: 20px; /* Menor margen superior para el botón de volver */
-    }
-}
-
-@media (max-width: 576px) {
-    body {
-        padding-top: 60px;
-    }
-
-    header {
-        height: 60px;
-    }
-
-    .logo-img {
-        height: 35px;
-    }
-    
-    nav {
-        top: 60px;
-    }
-    
-    .hero h1 {
-        font-size: 36px;
-    }
-    
-    .section-title h2 {
-        font-size: 32px;
-    }
-    
-    .filter-bar {
-        gap: 10px;
-    }
-    
-    .filter-btn {
-        padding: 8px 15px;
-        font-size: 14px;
-    }
-    
-    .promo-content {
-        padding: 30px;
-    }
-    
-    .promo-content h2 {
-        font-size: 32px;
+        margin-top: 20px;
+        position: fixed;
+        top: 70px;
+        left: 15px;
+        z-index: 1000;
+        background: white;
+        padding: 10px 15px;
+        border-radius: 30px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 5px;
     }
 }
