@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Elementos del DOM
     const navLinks = document.querySelectorAll('.nav-link');
     const screens = document.querySelectorAll('.screen');
     const menuToggle = document.querySelector('.menu-toggle');
@@ -21,333 +22,184 @@ document.addEventListener('DOMContentLoaded', function() {
     const backToProducts = document.querySelector('.back-to-products');
     const viewCollectionBtn = document.getElementById('view-collection-btn');
     const policyLinks = document.querySelectorAll('.policy-link');
+    const filterBar = document.querySelector('.filter-bar');
     
     let cart = [];
 
+    // Navegación entre pantallas
     function navigateTo(screenId) {
-        searchInput.value = '';
-        
-        navLinks.forEach(link => {
-            link.classList.remove('nav-active');
-            if(link.getAttribute('data-target') === screenId) {
-                link.classList.add('nav-active');
-            }
-        });
-
         screens.forEach(screen => {
             screen.classList.remove('active');
-            if(screen.id === screenId) {
-                screen.classList.add('active');
-                window.scrollTo(0, 0);
-            }
+            if(screen.id === screenId) screen.classList.add('active');
         });
-
-        nav.classList.remove('active');
         
-        if(screenId === 'product-detail') {
-            window.scrollTo(0, 0);
-        }
+        navLinks.forEach(link => {
+            link.classList.toggle('nav-active', link.dataset.target === screenId);
+        });
+        
+        window.scrollTo(0, 0);
     }
 
+    // Eventos de navegación
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = link.getAttribute('data-target');
-            navigateTo(target);
+            navigateTo(link.dataset.target);
         });
     });
 
-    menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-    });
-
+    menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
     logoLink.addEventListener('click', (e) => {
         e.preventDefault();
         navigateTo('home');
     });
 
-    if (exploreBtn) {
-        exploreBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            navigateTo('perfumes');
-        });
-    }
-
-    if (viewCollectionBtn) {
-        viewCollectionBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            navigateTo('promotions');
-            setTimeout(() => {
-                const promotionsSection = document.getElementById('promotions-grid');
-                promotionsSection.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        });
-    }
-
-    cartIcon.addEventListener('click', () => {
-        cartModal.classList.add('active');
-    });
-    
-    closeCart.addEventListener('click', () => {
-        cartModal.classList.remove('active');
+    // Eventos específicos de botones
+    if(exploreBtn) exploreBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo('perfumes');
     });
 
-    if (backToProducts) {
-        backToProducts.addEventListener('click', () => {
-            navigateTo('perfumes');
-        });
-    }
+    if(viewCollectionBtn) viewCollectionBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo('promotions');
+    });
 
+    // Carrito
+    cartIcon.addEventListener('click', () => cartModal.classList.add('active'));
+    closeCart.addEventListener('click', () => cartModal.classList.remove('active'));
+
+    // Inventario de perfumes
     const perfumesInventory = {
-        "Lattafa Raghba for Men": {
-            name: "Lattafa Raghba for Men",
+        "Fakhar Lattafa": {
+            name: "Fakhar Lattafa",
             category: "Hombre",
-            price: 1850,
-            image: "./img/lattafa-raghba-men.jpg",
-            description: "Fragancia oriental amaderada con notas de oud, vainilla y azúcar quemada. Perfecta para eventos nocturnos y ocasiones especiales.",
-            tones: ["Oud", "Vainilla", "Azúcar quemada", "Ámbar", "Maderas"],
-            topNotes: ["Azafrán", "Pimienta"],
-            duration: "24 horas"
+            price: 1129,
+            image: "./img/Fakhar_Lattafa.png",
+            description: "Fragancia oriental amaderada con notas de oud, vainilla y azúcar quemada.",
+            tones: ["Aromático", "Amaderado", "Fresco Especiado"],
+            topNotes: ["Manzana", "Bergamota"],
+            duration: "Duradera"
         },
-        "Lattafa Fakhar Black": {
-            name: "Lattafa Fakhar Black",
+        "Fakhar Gold Lattafa": {
+            name: "Fakhar Gold Lattafa",
             category: "Hombre",
-            price: 1650,
-            image: "./img/lattafa-fakhar-black.jpg",
-            description: "Elegante fragancia con un toque fresco de bergamota combinada con notas cálidas de ámbar y madera de cedro.",
-            tones: ["Bergamota", "Ámbar", "Cedro", "Musk", "Vetiver"],
-            topNotes: ["Bergamota", "Lavanda"],
-            duration: "18 horas"
+            price: 949,
+            image: "./img/Fakhar_Gold_Lattafa.png",
+            description: "Elegante fragancia con un toque fresco de bergamota.",
+            tones: ["Ámbar", "Nardos", "Floral Blanco"],
+            topNotes: ["Toronja", "Pimienta Rosa"],
+            duration: "Duradera"
         },
-        "Rasasi Hawas for Him": {
-            name: "Rasasi Hawas for Him",
+        "Asad Lattafa": {
+            name: "Asad Lattafa",
             category: "Hombre",
-            price: 2100,
-            image: "./img/rasasi-hawas-him.jpg",
-            description: "Fragancia acuática con notas frescas de manzana y cardamomo, perfecta para el uso diario.",
-            tones: ["Manzana", "Cardamomo", "Ámbar", "Maderas", "Musk"],
-            topNotes: ["Manzana", "Cardamomo"],
-            duration: "20 horas"
+            price: 1049,
+            image: "./img/Asad_Lattafa.png",
+            description: "Fragancia acuática con notas frescas de manzana y cardamomo.",
+            tones: ["Ámbar", "Fresco Especiado", "Avainillado"],
+            topNotes: ["Pimienta Negra", "Piña"],
+            duration: "Duradera"
         },
-        "Ajmal Kuro": {
-            name: "Ajmal Kuro",
+        "Ameerat Al Arab Asdaaf": {
+            name: "Ameerat Al Arab Asdaaf",
             category: "Hombre",
-            price: 1950,
-            image: "./img/ajmal-kuro.jpg",
-            description: "Fragancia intensa con notas especiadas y amaderadas, ideal para hombres que buscan una presencia impactante.",
-            tones: ["Pimienta", "Lavanda", "Vetiver", "Ámbar", "Cuero"],
-            topNotes: ["Pimienta negra", "Lavanda"],
-            duration: "22 horas"
+            price: 899,
+            image: "./img/Ameerat_Al_Arab_Asdaaf.png",
+            description: "Fragancia intensa con notas especiadas y amaderadas.",
+            tones: ["Albahacar", "Cardamomo", "Menta"],
+            topNotes: ["Jazmin", "Lavanda"],
+            duration: "Duradera"
         },
-        "Ard Al Zaafaran Dirham Oud": {
-            name: "Ard Al Zaafaran Dirham Oud",
+        "Qaed Al Fursan Lattafa": {
+            name: "Qaed Al Fursan Lattafa",
             category: "Hombre",
-            price: 2200,
-            image: "./img/ard-al-zaafaran-oud.jpg",
-            description: "Lujosa fragancia con notas de oud y especias orientales, para el hombre sofisticado.",
-            tones: ["Oud", "Azafrán", "Rosa", "Ámbar", "Maderas"],
-            topNotes: ["Azafrán", "Pimienta"],
-            duration: "24+ horas"
+            price: 1029,
+            image: "./img/Qaed_Al_Fursan_Lattafa.png",
+            description: "Lujosa fragancia con notas de oud y especias orientales.",
+            tones: ["Afrutados", "Dulce", "Tropical"],
+            topNotes: ["Piña", "Azafran"],
+            duration: "Duradera"
         },
-        "Lattafa Asad": {
-            name: "Lattafa Asad",
+        "Al Noble Wazeer Lattafa": {
+            name: "Al Noble Wazeer Lattafa",
             category: "Hombre",
-            price: 1750,
-            image: "./img/lattafa-asad.jpg",
-            description: "Fragancia especiada con notas de pimienta y lavanda, con un fondo amaderado y ámbrado.",
-            tones: ["Pimienta", "Lavanda", "Vainilla", "Ámbar", "Maderas"],
-            topNotes: ["Pimienta", "Lavanda"],
-            duration: "20 horas"
+            price: 1149,
+            image: "./img/Al_Noble_Wazeer_Lattafa.png",
+            description: "Fragancia especiada con notas de pimienta y lavanda.",
+            tones: ["Dulce", "Amaderado", "Aromático"],
+            topNotes: ["Menta", "Naranja"],
+            duration: "Duradera"
         },
-        "Rasasi La Yuqawam Pour Homme": {
-            name: "Rasasi La Yuqawam Pour Homme",
+        "Hayaati Gold Elixir Lattafa": {
+            name: "Hayaati Gold Elixir Lattafa",
             category: "Hombre",
-            price: 2400,
-            image: "./img/rasasi-la-yuqawam.jpg",
-            description: "Fragancia de cuero y frutas con un toque de frescura cítrica y profundidad amaderada.",
-            tones: ["Frambuesa", "Pera", "Azafrán", "Cuero", "Vetiver"],
-            topNotes: ["Frambuesa", "Peras"],
-            duration: "24 horas"
+            price: 839,
+            image: "./img/Hayaati_Gold_Elixir_Lattafa.png",
+            description: "Fragancia de cuero y frutas con frescura cítrica.",
+            tones: ["Cuero", "Cítrico", "Avainillado"],
+            topNotes: ["Bergamota", "Toronja"],
+            duration: "Duradera"
         },
-        "Ajmal Dahn Al Oudh Al Shams": {
-            name: "Ajmal Dahn Al Oudh Al Shams",
+        "Asad Zanzibar Lattafa": {
+            name: "Asad Zanzibar Lattafa",
             category: "Hombre",
-            price: 2600,
-            image: "./img/ajmal-dahn-al-oudh.jpg",
-            description: "Fragancia premium con oud de alta calidad y notas florales, para ocasiones especiales.",
-            tones: ["Oud", "Rosa", "Azafrán", "Ámbar", "Maderas"],
-            topNotes: ["Azafrán", "Rosa"],
-            duration: "24+ horas"
+            price: 1139,
+            image: "./img/Asad_Zanzibar_Lattafa.png",
+            description: "Fragancia premium con oud de alta calidad.",
+            tones: ["Avainillado", "Iris", "Atalcado"],
+            topNotes: ["Lavanda", "Pimienta Negra"],
+            duration: "Duradeara"
         },
-        "Afnan Supremacy Silver": {
-            name: "Afnan Supremacy Silver",
+        "Maahir Lattafa": {
+            name: "Maahir Lattafa",
             category: "Hombre",
-            price: 2300,
-            image: "./img/afnan-supremacy-silver.jpg",
-            description: "Fragancia amaderada y especiada con un toque fresco de bergamota y notas cálidas de ámbar.",
-            tones: ["Bergamota", "Pimienta", "Vetiver", "Ámbar", "Maderas"],
-            topNotes: ["Bergamota", "Pimienta"],
-            duration: "22 horas"
+            price: 1119,
+            image: "./img/Maahir_Lattafa.png",
+            description: "Fragancia amaderada y especiada con bergamota.",
+            tones: ["Atalcado", "Amaderado", "Avainillado"],
+            topNotes: ["Durazno", "Bergamota"],
+            duration: "Duradera"
         },
-        "Lattafa Qaed Al Fursan": {
-            name: "Lattafa Qaed Al Fursan",
+        "Stallion 53 Emper": {
+            name: "Stallion 53",
             category: "Hombre",
-            price: 1800,
-            image: "./img/lattafa-qaed-al-fursan.jpg",
-            description: "Fragancia fresca y frutal con notas de piña y manzana, ideal para el día a día.",
-            tones: ["Piña", "Manzana", "Musk", "Ámbar", "Maderas"],
-            topNotes: ["Piña", "Manzana"],
-            duration: "18 horas"
+            price: 1119,
+            image: "./img/Stallion 53 Emper.png",
+            description: "Fragancia fresca y frutal con notas de piña.",
+            tones: ["Amaderado", "Atalcado", "Cuero"],
+            topNotes: ["Sándalo", "Cuero"],
+            duration: "Duradera"
         },
         "Lattafa Yara": {
             name: "Lattafa Yara",
             category: "Mujer",
             price: 1650,
             image: "./img/lattafa-yara.jpg",
-            description: "Fragancia floral y frutal con notas de frutos rojos y flores blancas, femenina y elegante.",
-            tones: ["Frutas rojas", "Fresia", "Vainilla", "Almizcle", "Sándalo"],
+            description: "Fragancia floral y frutal con notas de frutos rojos.",
+            tones: ["Frutas rojas", "Fresia", "Vainilla"],
             topNotes: ["Frutas rojas", "Fresia"],
             duration: "20 horas"
-        },
-        "Lattafa Raghba for Women": {
-            name: "Lattafa Raghba for Women",
-            category: "Mujer",
-            price: 1750,
-            image: "./img/lattafa-raghba-women.jpg",
-            description: "Fragancia oriental cálida con notas de vainilla y oud, perfecta para noches especiales.",
-            tones: ["Vainilla", "Oud", "Ámbar", "Almizcle", "Sándalo"],
-            topNotes: ["Vainilla", "Oud"],
-            duration: "24 horas"
-        },
-        "Rasasi Hawas for Her": {
-            name: "Rasasi Hawas for Her",
-            category: "Mujer",
-            price: 1900,
-            image: "./img/rasasi-hawas-her.jpg",
-            description: "Fragancia floral acuática con notas de peonía y lirio de los valles, fresca y femenina.",
-            tones: ["Peonía", "Lirio", "Almizcle", "Ámbar", "Maderas"],
-            topNotes: ["Peonía", "Lirio"],
-            duration: "18 horas"
-        },
-        "Ajmal Wisal Dhahab": {
-            name: "Ajmal Wisal Dhahab",
-            category: "Mujer",
-            price: 2200,
-            image: "./img/ajmal-wisal-dhahab.jpg",
-            description: "Fragancia floral intensa con notas de rosa y jazmín, con un toque dorado de azafrán.",
-            tones: ["Rosa", "Jazmín", "Azafrán", "Ámbar", "Maderas"],
-            topNotes: ["Rosa", "Jazmín"],
-            duration: "22 horas"
-        },
-        "Lattafa Fakhar Rose": {
-            name: "Lattafa Fakhar Rose",
-            category: "Mujer",
-            price: 1700,
-            image: "./img/lattafa-fakhar-rose.jpg",
-            description: "Fragancia floral con notas de rosa y frutas, elegante y sofisticada.",
-            tones: ["Rosa", "Frambuesa", "Vainilla", "Ámbar", "Musk"],
-            topNotes: ["Rosa", "Frambuesa"],
-            duration: "20 horas"
-        },
-        "Ard Al Zaafaran Dirham Wardi": {
-            name: "Ard Al Zaafaran Dirham Wardi",
-            category: "Mujer",
-            price: 2000,
-            image: "./img/ard-al-zaafaran-wardi.jpg",
-            description: "Fragancia floral oriental con notas de rosa y oud, con un toque de dulzura.",
-            tones: ["Rosa", "Oud", "Vainilla", "Ámbar", "Maderas"],
-            topNotes: ["Rosa", "Oud"],
-            duration: "24 horas"
-        },
-        "Ajmal Sacrifice for Her": {
-            name: "Ajmal Sacrifice for Her",
-            category: "Mujer",
-            price: 2300,
-            image: "./img/ajmal-sacrifice-her.jpg",
-            description: "Fragancia floral intensa con notas de jazmín y gardenia, con un fondo amaderado.",
-            tones: ["Jazmín", "Gardenia", "Vainilla", "Sándalo", "Ámbar"],
-            topNotes: ["Jazmín", "Gardenia"],
-            duration: "22 horas"
-        },
-        "Rasasi Rumz Al Rasasi 9453 Femme": {
-            name: "Rasasi Rumz Al Rasasi 9453 Femme",
-            category: "Mujer",
-            price: 2100,
-            image: "./img/rasasi-rumz-femme.jpg",
-            description: "Fragancia floral frutal con notas de pera y peonía, fresca y moderna.",
-            tones: ["Pera", "Peonía", "Almizcle", "Vainilla", "Maderas"],
-            topNotes: ["Pera", "Peonía"],
-            duration: "18 horas"
-        },
-        "Lattafa Emaan": {
-            name: "Lattafa Emaan",
-            category: "Mujer",
-            price: 1800,
-            image: "./img/lattafa-emaan.jpg",
-            description: "Fragancia floral con notas de jazmín y lirio, delicada y femenina.",
-            tones: ["Jazmín", "Lirio", "Vainilla", "Ámbar", "Musk"],
-            topNotes: ["Jazmín", "Lirio"],
-            duration: "20 horas"
-        },
-        "Khaltat Al Arabia Royal Blends": {
-            name: "Khaltat Al Arabia Royal Blends",
-            category: "Mujer",
-            price: 2500,
-            image: "./img/khaltat-al-arabia.jpg",
-            description: "Fragancia floral intensa con notas de rosa y azafrán, con un toque de dulzura.",
-            tones: ["Rosa", "Azafrán", "Vainilla", "Ámbar", "Musk"],
-            topNotes: ["Rosa", "Azafrán"],
-            duration: "24+ horas"
         },
         "Swiss Arabian Shaghaf Oud": {
             name: "Swiss Arabian Shaghaf Oud",
             category: "Unisex",
             price: 2100,
             image: "./img/swiss-arabian-shaghaf.jpg",
-            description: "Fragancia oriental con notas de oud y rosas, intensa y sofisticada.",
-            tones: ["Oud", "Rosas", "Azafrán", "Ámbar", "Maderas"],
+            description: "Fragancia oriental con notas de oud y rosas.",
+            tones: ["Oud", "Rosas", "Azafrán"],
             topNotes: ["Oud", "Rosas"],
             duration: "24+ horas"
-        },
-        "Ajmal Amber Wood": {
-            name: "Ajmal Amber Wood",
-            category: "Unisex",
-            price: 1950,
-            image: "./img/ajmal-amber-wood.jpg",
-            description: "Fragancia amaderada con notas de ámbar y pachulí, cálida y envolvente.",
-            tones: ["Ámbar", "Pachulí", "Vetiver", "Musk", "Sándalo"],
-            topNotes: ["Ámbar", "Pachulí"],
-            duration: "22 horas"
-        },
-        "Lattafa Oud Mood": {
-            name: "Lattafa Oud Mood",
-            category: "Unisex",
-            price: 1800,
-            image: "./img/lattafa-oud-mood.jpg",
-            description: "Fragancia de oud con notas especiadas y florales, misteriosa y atractiva.",
-            tones: ["Oud", "Azafrán", "Rosa", "Vainilla", "Maderas"],
-            topNotes: ["Oud", "Azafrán"],
-            duration: "24 horas"
-        },
-        "Rasasi La Yuqawam Ambergris Showers": {
-            name: "Rasasi La Yuqawam Ambergris Showers",
-            category: "Unisex",
-            price: 2300,
-            image: "./img/rasasi-ambergris.jpg",
-            description: "Fragancia acuática con notas de ámbar gris y maderas, fresca y duradera.",
-            tones: ["Ámbar gris", "Maderas", "Musk", "Vetiver", "Algas"],
-            topNotes: ["Ámbar gris", "Maderas"],
-            duration: "20 horas"
         }
     };
 
+    // Renderizar perfumes
     function renderPerfumes(category = 'all', searchTerm = '') {
         perfumesGrid.innerHTML = '';
         
         Object.values(perfumesInventory).forEach(perfume => {
-            if (category !== 'all' && perfume.category !== getCategoryName(category)) return;
-            
-            if (searchTerm && !perfume.name.toLowerCase().includes(searchTerm.toLowerCase())) return;
+            if(category !== 'all' && perfume.category !== getCategoryName(category)) return;
+            if(searchTerm && !perfume.name.toLowerCase().includes(searchTerm.toLowerCase())) return;
             
             const productCard = document.createElement('div');
             productCard.className = 'product-card animate-slide-up';
@@ -374,6 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Renderizar decants
     function renderDecant() {
         decantGrid.innerHTML = '';
         
@@ -403,24 +256,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Renderizar promociones
     function renderPromotions() {
-        const promotionPerfumes = [
-            "Lattafa Asad",
-            "Ard Al Zaafaran Dirham Wardi",
-            "Swiss Arabian Shaghaf Oud"
-        ];
-        
+        const promotionPerfumes = ["Fakhar Lattafa", "Lattafa Yara", "Swiss Arabian Shaghaf Oud"];
         promotionsGrid.innerHTML = '';
         
         promotionPerfumes.forEach(name => {
             const perfume = perfumesInventory[name];
+            if(!perfume) return;
+            
+            const discount = name === "Fakhar Lattafa" ? 0.25 : name === "Lattafa Yara" ? 0.20 : 0.15;
+            const discountedPrice = perfume.price * (1 - discount);
             
             const productCard = document.createElement('div');
             productCard.className = 'product-card animate-slide-up';
             productCard.dataset.name = perfume.name;
             
             productCard.innerHTML = `
-                <div class="product-badge">${name === "Lattafa Asad" ? "25% OFF" : name === "Ard Al Zaafaran Dirham Wardi" ? "20% OFF" : "15% OFF"}</div>
+                <div class="product-badge">${Math.round(discount * 100)}% OFF</div>
                 <div class="product-image">
                     <img src="${perfume.image}" alt="${perfume.name}">
                     <div class="product-actions">
@@ -433,10 +286,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="product-category">${perfume.category}</span>
                     <h3>${perfume.name}</h3>
                     <div class="product-price">
-                        ${name === "Lattafa Asad" ? `<span class="original-price">$1,750</span>` : ''}
-                        ${name === "Ard Al Zaafaran Dirham Wardi" ? `<span class="original-price">$2,000</span>` : ''}
-                        ${name === "Swiss Arabian Shaghaf Oud" ? `<span class="original-price">$2,100</span>` : ''}
-                        <span class="discount-price">$${(name === "Lattafa Asad" ? perfume.price * 0.75 : name === "Ard Al Zaafaran Dirham Wardi" ? perfume.price * 0.8 : perfume.price * 0.85).toLocaleString('es-MX')}</span> MXN
+                        <span class="original-price">$${perfume.price.toLocaleString('es-MX')}</span>
+                        <span class="discount-price">$${discountedPrice.toLocaleString('es-MX')}</span> MXN
                     </div>
                     <a href="#" class="btn view-detail">Ver Detalles</a>
                 </div>
@@ -446,9 +297,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Mostrar detalle del producto
     function showProductDetail(productName) {
         const perfume = perfumesInventory[productName];
+        if(!perfume) return;
+        
         const isDecantPage = document.querySelector('.nav-link[data-target="decant"].nav-active');
+        const price = isDecantPage ? 350 : perfume.price;
         
         detailContainer.innerHTML = `
             <div class="detail-image-container">
@@ -457,8 +312,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="detail-info">
                 <span class="detail-category">${perfume.category}${isDecantPage ? ' - 30ml' : ''}</span>
                 <h1>${perfume.name}</h1>
-                <div class="detail-price">$${isDecantPage ? '350' : perfume.price.toLocaleString('es-MX')} MXN</div>
-                <p class="detail-description">${isDecantPage ? 'Versión decantada de 30ml con atomizador moderno. ' : ''}${perfume.description}</p>
+                <div class="detail-price">$${price.toLocaleString('es-MX')} MXN</div>
+                <p class="detail-description">${perfume.description}</p>
                 
                 <div class="detail-features">
                     <div class="feature-card">
@@ -481,14 +336,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 
-                <button class="btn add-to-cart-detail" data-name="${perfume.name}">Añadir al Carrito</button>
+                <button class="btn add-to-cart-detail">Añadir al Carrito</button>
             </div>
         `;
-        
-        const detailImage = document.querySelector('.detail-image');
-        detailImage.addEventListener('click', () => {
-            detailImage.classList.toggle('zoomed');
-        });
         
         document.querySelector('.add-to-cart-detail').addEventListener('click', () => {
             addToCart({
@@ -498,13 +348,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         navigateTo('product-detail');
-        window.scrollTo(0, 0);
     }
 
+    // Añadir al carrito
     function addToCart(product) {
         const existingItem = cart.find(item => item.name === product.name);
         
-        if (existingItem) {
+        if(existingItem) {
             existingItem.quantity++;
         } else {
             cart.push({
@@ -520,10 +370,11 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => cartIcon.classList.remove('pulse'), 500);
     }
 
+    // Actualizar carrito
     function updateCart() {
         cartItemsContainer.innerHTML = '';
         
-        if (cart.length === 0) {
+        if(cart.length === 0) {
             cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
             cartSubtotal.textContent = '$0.00 MXN';
             cartTotal.textContent = '$0.00 MXN';
@@ -567,9 +418,10 @@ document.addEventListener('DOMContentLoaded', function() {
         cartTotal.textContent = `$${total.toLocaleString('es-MX')} MXN`;
         cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
         
+        // Eventos de cantidad
         document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
             btn.addEventListener('click', () => {
-                const index = parseInt(btn.getAttribute('data-index'));
+                const index = parseInt(btn.dataset.index);
                 if(cart[index].quantity > 1) {
                     cart[index].quantity--;
                     updateCart();
@@ -579,144 +431,138 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
             btn.addEventListener('click', () => {
-                const index = parseInt(btn.getAttribute('data-index'));
+                const index = parseInt(btn.dataset.index);
                 cart[index].quantity++;
                 updateCart();
             });
         });
         
+        // Eventos de eliminación
         document.querySelectorAll('.remove-item').forEach(btn => {
             btn.addEventListener('click', () => {
-                const index = parseInt(btn.getAttribute('data-index'));
+                const index = parseInt(btn.dataset.index);
                 cart.splice(index, 1);
                 updateCart();
             });
         });
     }
 
+    // Helper functions
     function getCategoryName(category) {
-        switch(category) {
-            case 'man': return 'Hombre';
-            case 'woman': return 'Mujer';
-            case 'unisex': return 'Unisex';
-            default: return '';
-        }
+        const categories = {
+            'man': 'Hombre',
+            'woman': 'Mujer',
+            'unisex': 'Unisex'
+        };
+        return categories[category] || '';
     }
 
-    function handleProductAction(e) {
-        const target = e.target;
-        
-        if (target.classList.contains('view-detail') || target.classList.contains('view-detail-btn')) {
+    // Delegación de eventos para elementos dinámicos
+    document.addEventListener('click', function(e) {
+        // Ver Detalle
+        if(e.target.classList.contains('view-detail') || 
+           e.target.closest('.view-detail-btn')) {
             e.preventDefault();
-            const productCard = target.closest('.product-card');
-            const productName = productCard.dataset.name;
-            showProductDetail(productName);
+            const productCard = e.target.closest('.product-card');
+            if(productCard) showProductDetail(productCard.dataset.name);
         }
-        else if (target.classList.contains('add-to-cart') || target.classList.contains('add-to-cart-detail')) {
-            const productCard = target.closest('.product-card');
-            if (!productCard) return;
-            
-            const productName = productCard.dataset.name;
-            const perfume = perfumesInventory[productName];
-            const isDecantPage = document.querySelector('.nav-link[data-target="decant"].nav-active');
-            
-            addToCart({
-                ...perfume,
-                price: isDecantPage ? 350 : perfume.price
-            });
+        
+        // Añadir al carrito
+        if(e.target.classList.contains('add-to-cart') || 
+           e.target.closest('.add-to-cart')) {
+            const productCard = e.target.closest('.product-card');
+            if(productCard) {
+                const perfume = perfumesInventory[productCard.dataset.name];
+                const isDecantPage = document.querySelector('.nav-link[data-target="decant"].nav-active');
+                
+                if(perfume) {
+                    addToCart({
+                        ...perfume,
+                        price: isDecantPage ? 350 : perfume.price
+                    });
+                }
+            }
         }
+    });
+
+    // Botón Volver
+    if(backToProducts) {
+        backToProducts.addEventListener('click', () => {
+            navigateTo('perfumes');
+        });
     }
 
+    // Filtros y búsqueda
+    if(filterBar) {
+        filterBar.addEventListener('click', (e) => {
+            if(e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn === e.target);
+                });
+                renderPerfumes(e.target.dataset.category);
+            }
+        });
+    }
+
+    if(searchInput) {
+        searchInput.addEventListener('input', () => {
+            const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
+            renderPerfumes(activeCategory, searchInput.value);
+        });
+    }
+
+    // Checkout
+    document.querySelector('.checkout-btn')?.addEventListener('click', () => {
+        if(cart.length === 0) return;
+        
+        const phoneNumber = "526621383780";
+        let message = "Carrito de Compra:\n\n";
+        
+        cart.forEach(item => {
+            message += `• ${item.name} (${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}) - $${(item.price * item.quantity).toLocaleString('es-MX')} MXN\n`;
+        });
+        
+        const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const shippingCost = subtotal >= 1000 ? 0 : 150;
+        const total = subtotal + shippingCost;
+        
+        message += `\nSubtotal: $${subtotal.toLocaleString('es-MX')} MXN`;
+        message += `\nEnv\u00edo: ${shippingCost === 0 ? 'Gratis' : '$' + shippingCost + ' MXN'}`;
+        message += `\nTotal: $${total.toLocaleString('es-MX')} MXN`;
+        
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        cart = [];
+        updateCart();
+        cartModal.classList.remove('active');
+    });
+
+    // Inicialización
     function init() {
         renderPerfumes();
         renderDecant();
         renderPromotions();
+        updateCart();
         
-        document.addEventListener('click', handleProductAction);
-
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                const category = button.getAttribute('data-category');
-                renderPerfumes(category);
-            });
-        });
-
-        searchInput.addEventListener('input', () => {
-            const category = document.querySelector('.filter-btn.active')?.getAttribute('data-category') || 'all';
-            renderPerfumes(category, searchInput.value);
-        });
-
-        document.querySelector('.checkout-btn').addEventListener('click', () => {
-            if(cart.length === 0) return;
-            
-            const phoneNumber = "526621383780";
-            let message = "Carrito de Compra:\n\n";
-            
-            cart.forEach(item => {
-                message += `• ${item.name} (${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}) - ${(item.price * item.quantity).toLocaleString('es-MX')} MXN\n`;
-            });
-            
-            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const shippingCost = subtotal >= 1000 ? 0 : 150;
-            const total = subtotal + shippingCost;
-            
-            message += `\nSubtotal: $${subtotal.toLocaleString('es-MX')} MXN`;
-            message += `\nEnv\u00edo: ${shippingCost === 0 ? 'Gratis' : '$' + shippingCost + ' MXN'}`;
-            message += `\nTotal: $${total.toLocaleString('es-MX')} MXN`;
-            
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-            
-            cart = [];
-            updateCart();
-            cartModal.classList.remove('active');
-        });
-
-        document.querySelector('.contact-form form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
-            e.target.reset();
-        });
-
+        // Políticas de WhatsApp
         policyLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const policy = link.getAttribute('data-policy');
-                let message = "Hola! Quisiera saber más acerca de su política de ";
+                const policy = link.dataset.policy;
+                const messages = {
+                    'garantia': 'Garantía de Calidad',
+                    'durabilidad': 'Durabilidad del Olor',
+                    'certificacion': 'Certificación',
+                    'envio': 'Envío Seguro'
+                };
                 
-                switch(policy) {
-                    case 'garantia':
-                        message += "Garantía de Calidad";
-                        break;
-                    case 'durabilidad':
-                        message += "Durabilidad del Olor";
-                        break;
-                    case 'certificacion':
-                        message += "Certificación";
-                        break;
-                    case 'envio':
-                        message += "Envío Seguro";
-                        break;
+                if(messages[policy]) {
+                    const message = `Hola! Quisiera saber más acerca de su política de ${messages[policy]}`;
+                    window.open(`https://wa.me/526621383780?text=${encodeURIComponent(message)}`, '_blank');
                 }
-                
-                const whatsappUrl = `https://wa.me/526621383780?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
             });
         });
-
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.05)';
-            }
-        });
-
-        updateCart();
     }
 
     init();
