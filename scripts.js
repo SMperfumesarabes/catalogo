@@ -1,361 +1,312 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Elementos del DOM
-    const navLinks = document.querySelectorAll('.nav-link');
     const screens = document.querySelectorAll('.screen');
+    const navLinks = document.querySelectorAll('.nav-link');
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
-    const logoLink = document.querySelector('.logo-link');
     const cartIcon = document.querySelector('.cart-icon');
-    const closeCart = document.querySelector('.close-cart');
     const cartModal = document.querySelector('.cart-modal');
+    const closeCart = document.querySelector('.close-cart');
     const cartItemsContainer = document.querySelector('.cart-items');
+    const cartCount = document.querySelector('.cart-count');
     const cartSubtotal = document.getElementById('cart-subtotal');
     const cartTotal = document.getElementById('cart-total');
-    const shippingFee = document.getElementById('shipping-fee');
-    const cartCount = document.querySelector('.cart-count');
-    const exploreBtn = document.getElementById('explore-btn');
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    const whatsappBtn = document.querySelector('.whatsapp-btn');
+    const backToProductsBtn = document.querySelector('.back-to-products');
     const searchInput = document.getElementById('search-input');
-    const perfumesGrid = document.getElementById('perfumes-grid');
-    const decantGrid = document.getElementById('decant-grid');
-    const promotionsGrid = document.getElementById('promotions-grid');
-    const detailContainer = document.getElementById('detail-content');
-    const backToProducts = document.querySelector('.back-to-products');
-    const viewCollectionBtn = document.getElementById('view-collection-btn');
-    const policyLinks = document.querySelectorAll('.policy-link');
-    const filterBar = document.querySelector('.filter-bar');
+    const noResults = document.querySelector('.no-results');
+    const filterBtns = document.querySelectorAll('.filter-btn');
     
-    let cart = [];
-
-    // Navegación entre pantallas
-    function navigateTo(screenId) {
-        screens.forEach(screen => {
-            screen.classList.remove('active');
-            if(screen.id === screenId) screen.classList.add('active');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentScreen = 'home';
+    let products = [];
+    let decantProducts = [];
+    
+    function init() {
+        loadProducts();
+        setupEventListeners();
+        updateCartCount();
+        showScreen(currentScreen);
+    }
+    
+    function loadProducts() {
+        products = [
+            {
+                id: 1,
+                name: "Lattafa Raghba for Men",
+                category: "man",
+                price: 1850,
+                image: "./img/lattafa-raghba-men.jpg",
+                description: "Una fragancia oriental amaderada para hombre que combina notas de vainilla, ámbar y sándalo.",
+                features: ["Notas de salida: Bergamota, Cardamomo", "Notas de corazón: Vainilla, Ámbar", "Notas de fondo: Sándalo, Pachulí"],
+                durability: "8-10 horas"
+            },
+            {
+                id: 2,
+                name: "Lattafa Yara",
+                category: "woman",
+                price: 1650,
+                image: "./img/lattafa-yara.jpg",
+                description: "Una fragancia floral frutal para mujer con notas de frutas tropicales y flores blancas.",
+                features: ["Notas de salida: Frutas tropicales", "Notas de corazón: Flores blancas", "Notas de fondo: Vainilla, Almizcle"],
+                durability: "6-8 horas"
+            },
+            {
+                id: 3,
+                name: "Swiss Arabian Shaghaf Oud",
+                category: "unisex",
+                price: 2100,
+                image: "./img/swiss-arabian-shaghaf.jpg",
+                description: "Una fragancia oriental amaderada unisex con notas de oud, azafrán y rosas.",
+                features: ["Notas de salida: Azafrán, Cardamomo", "Notas de corazón: Rosa, Oud", "Notas de fondo: Ámbar, Sándalo"],
+                durability: "10-12 horas"
+            },
+            {
+                id: 4,
+                name: "Rasasi Hawas",
+                category: "man",
+                price: 1950,
+                image: "./img/rasasi-hawas.jpg",
+                description: "Una fragancia acuática aromática para hombre con notas de manzana, lavanda y ámbar.",
+                features: ["Notas de salida: Manzana, Bergamota", "Notas de corazón: Lavanda, Pimienta", "Notas de fondo: Ámbar, Almizcle"],
+                durability: "8-10 horas"
+            },
+            {
+                id: 5,
+                name: "Lattafa Ana Abiyedh",
+                category: "woman",
+                price: 1750,
+                image: "./img/lattafa-ana-abiyedh.jpg",
+                description: "Una fragancia floral frutal para mujer con notas de pera, lirio y almizcle.",
+                features: ["Notas de salida: Pera, Bergamota", "Notas de corazón: Lirio, Jazmín", "Notas de fondo: Almizcle, Vainilla"],
+                durability: "6-8 horas"
+            },
+            {
+                id: 6,
+                name: "Al Haramain Amber Oud",
+                category: "unisex",
+                price: 2250,
+                image: "./img/al-haramain-amber-oud.jpg",
+                description: "Una fragancia oriental amaderada unisex con notas de oud, ámbar y vainilla.",
+                features: ["Notas de salida: Azafrán, Cardamomo", "Notas de corazón: Oud, Rosa", "Notas de fondo: Ámbar, Vainilla"],
+                durability: "12+ horas"
+            }
+        ];
+        
+        decantProducts = products.map(product => ({
+            ...product,
+            price: Math.round(product.price * 0.3),
+            name: `${product.name} (Decant 30ml)`
+        }));
+        
+        renderProducts(products, document.getElementById('perfumes-grid'));
+        renderProducts(decantProducts, document.getElementById('decant-grid'));
+        renderProducts(products.filter(p => p.id <= 3), document.querySelector('.products-grid'));
+        renderProducts(products.slice(0, 3), document.getElementById('promotions-grid'));
+    }
+    
+    function setupEventListeners() {
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('data-target');
+                showScreen(target);
+                currentScreen = target;
+                
+                navLinks.forEach(l => l.classList.remove('nav-active'));
+                this.classList.add('nav-active');
+                
+                if (window.innerWidth <= 992) {
+                    nav.classList.remove('active');
+                }
+            });
         });
         
-        navLinks.forEach(link => {
-            link.classList.toggle('nav-active', link.dataset.target === screenId);
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
         });
+        
+        cartIcon.addEventListener('click', function() {
+            cartModal.classList.add('active');
+            renderCartItems();
+        });
+        
+        closeCart.addEventListener('click', function() {
+            cartModal.classList.remove('active');
+        });
+        
+        checkoutBtn.addEventListener('click', function() {
+            alert('Procediendo al pago...');
+        });
+        
+        whatsappBtn.addEventListener('click', function() {
+            this.classList.add('pulse');
+            setTimeout(() => this.classList.remove('pulse'), 500);
+        });
+        
+        backToProductsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showScreen(currentScreen);
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart')) {
+                const productCard = e.target.closest('.product-card');
+                const productName = productCard.getAttribute('data-name');
+                addToCart(productName);
+            }
+            
+            if (e.target.classList.contains('view-detail-btn') || e.target.classList.contains('view-detail')) {
+                e.preventDefault();
+                const productCard = e.target.closest('.product-card');
+                const productName = productCard.getAttribute('data-name');
+                showProductDetail(productName);
+            }
+            
+            if (e.target.classList.contains('quantity-btn')) {
+                const cartItem = e.target.closest('.cart-item');
+                const productName = cartItem.querySelector('.cart-item-title').textContent;
+                const isIncrease = e.target.textContent === '+';
+                updateCartItemQuantity(productName, isIncrease);
+            }
+            
+            if (e.target.classList.contains('remove-item')) {
+                const cartItem = e.target.closest('.cart-item');
+                const productName = cartItem.querySelector('.cart-item-title').textContent;
+                removeFromCart(productName);
+            }
+            
+            if (e.target.classList.contains('detail-image')) {
+                e.target.classList.toggle('zoomed');
+            }
+        });
+        
+        searchInput.addEventListener('input', function() {
+            filterProducts();
+        });
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterProducts();
+            });
+        });
+    }
+    
+    function showScreen(screenId) {
+        screens.forEach(screen => {
+            screen.classList.remove('active');
+            screen.style.display = 'none';
+        });
+        
+        const targetScreen = document.getElementById(screenId);
+        targetScreen.style.display = 'block';
+        setTimeout(() => targetScreen.classList.add('active'), 10);
+        
+        if (screenId === 'perfumes') {
+            filterProducts();
+        }
         
         window.scrollTo(0, 0);
     }
-
-    // Eventos de navegación
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            navigateTo(link.dataset.target);
+    
+    function renderProducts(productsArray, container) {
+        container.innerHTML = '';
+        
+        productsArray.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card animate-slide-up';
+            productCard.setAttribute('data-name', product.name);
+            
+            productCard.innerHTML = `
+                <div class="product-badge">${product.id <= 3 ? (product.id === 1 ? 'Nuevo' : product.id === 2 ? 'Más vendido' : 'Exclusivo') : 'Popular'}</div>
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-actions">
+                        <div class="action-btn"><i class="fas fa-heart"></i></div>
+                        <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
+                        <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-category">${product.category === 'man' ? 'Hombre' : product.category === 'woman' ? 'Mujer' : 'Unisex'}</span>
+                    <h3>${product.name}</h3>
+                    <div class="product-price">$<span class="current-price">${product.price.toLocaleString()}</span> MXN</div>
+                    <a href="#" class="btn view-detail">Ver Detalles</a>
+                </div>
+            `;
+            
+            container.appendChild(productCard);
         });
-    });
-
-    menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
-    logoLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        navigateTo('home');
-    });
-
-    // Eventos específicos de botones
-    if(exploreBtn) exploreBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        navigateTo('perfumes');
-    });
-
-    if(viewCollectionBtn) viewCollectionBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        navigateTo('promotions');
-    });
-
-    // Carrito
-    cartIcon.addEventListener('click', () => cartModal.classList.add('active'));
-    closeCart.addEventListener('click', () => cartModal.classList.remove('active'));
-
-    // Inventario de perfumes
-    const perfumesInventory = {
-        "Fakhar Lattafa": {
-            name: "Fakhar Lattafa",
-            category: "Hombre",
-            price: 1129,
-            image: "./img/Fakhar_Lattafa.png",
-            description: "Fragancia oriental amaderada con notas de oud, vainilla y azúcar quemada.",
-            tones: ["Aromático", "Amaderado", "Fresco Especiado"],
-            topNotes: ["Manzana", "Bergamota"],
-            duration: "Duradera"
-        },
-        "Fakhar Gold Lattafa": {
-            name: "Fakhar Gold Lattafa",
-            category: "Hombre",
-            price: 949,
-            image: "./img/Fakhar_Gold_Lattafa.png",
-            description: "Elegante fragancia con un toque fresco de bergamota.",
-            tones: ["Ámbar", "Nardos", "Floral Blanco"],
-            topNotes: ["Toronja", "Pimienta Rosa"],
-            duration: "Duradera"
-        },
-        "Asad Lattafa": {
-            name: "Asad Lattafa",
-            category: "Hombre",
-            price: 1049,
-            image: "./img/Asad_Lattafa.png",
-            description: "Fragancia acuática con notas frescas de manzana y cardamomo.",
-            tones: ["Ámbar", "Fresco Especiado", "Avainillado"],
-            topNotes: ["Pimienta Negra", "Piña"],
-            duration: "Duradera"
-        },
-        "Ameerat Al Arab Asdaaf": {
-            name: "Ameerat Al Arab Asdaaf",
-            category: "Hombre",
-            price: 899,
-            image: "./img/Ameerat_Al_Arab_Asdaaf.png",
-            description: "Fragancia intensa con notas especiadas y amaderadas.",
-            tones: ["Albahacar", "Cardamomo", "Menta"],
-            topNotes: ["Jazmin", "Lavanda"],
-            duration: "Duradera"
-        },
-        "Qaed Al Fursan Lattafa": {
-            name: "Qaed Al Fursan Lattafa",
-            category: "Hombre",
-            price: 1029,
-            image: "./img/Qaed_Al_Fursan_Lattafa.png",
-            description: "Lujosa fragancia con notas de oud y especias orientales.",
-            tones: ["Afrutados", "Dulce", "Tropical"],
-            topNotes: ["Piña", "Azafran"],
-            duration: "Duradera"
-        },
-        "Al Noble Wazeer Lattafa": {
-            name: "Al Noble Wazeer Lattafa",
-            category: "Hombre",
-            price: 1149,
-            image: "./img/Al_Noble_Wazeer_Lattafa.png",
-            description: "Fragancia especiada con notas de pimienta y lavanda.",
-            tones: ["Dulce", "Amaderado", "Aromático"],
-            topNotes: ["Menta", "Naranja"],
-            duration: "Duradera"
-        },
-        "Hayaati Gold Elixir Lattafa": {
-            name: "Hayaati Gold Elixir Lattafa",
-            category: "Hombre",
-            price: 839,
-            image: "./img/Hayaati_Gold_Elixir_Lattafa.png",
-            description: "Fragancia de cuero y frutas con frescura cítrica.",
-            tones: ["Cuero", "Cítrico", "Avainillado"],
-            topNotes: ["Bergamota", "Toronja"],
-            duration: "Duradera"
-        },
-        "Asad Zanzibar Lattafa": {
-            name: "Asad Zanzibar Lattafa",
-            category: "Hombre",
-            price: 1139,
-            image: "./img/Asad_Zanzibar_Lattafa.png",
-            description: "Fragancia premium con oud de alta calidad.",
-            tones: ["Avainillado", "Iris", "Atalcado"],
-            topNotes: ["Lavanda", "Pimienta Negra"],
-            duration: "Duradeara"
-        },
-        "Maahir Lattafa": {
-            name: "Maahir Lattafa",
-            category: "Hombre",
-            price: 1119,
-            image: "./img/Maahir_Lattafa.png",
-            description: "Fragancia amaderada y especiada con bergamota.",
-            tones: ["Atalcado", "Amaderado", "Avainillado"],
-            topNotes: ["Durazno", "Bergamota"],
-            duration: "Duradera"
-        },
-        "Stallion 53 Emper": {
-            name: "Stallion 53",
-            category: "Hombre",
-            price: 1119,
-            image: "./img/Stallion 53 Emper.png",
-            description: "Fragancia fresca y frutal con notas de piña.",
-            tones: ["Amaderado", "Atalcado", "Cuero"],
-            topNotes: ["Sándalo", "Cuero"],
-            duration: "Duradera"
-        },
-        "Lattafa Yara": {
-            name: "Lattafa Yara",
-            category: "Mujer",
-            price: 1650,
-            image: "./img/lattafa-yara.jpg",
-            description: "Fragancia floral y frutal con notas de frutos rojos.",
-            tones: ["Frutas rojas", "Fresia", "Vainilla"],
-            topNotes: ["Frutas rojas", "Fresia"],
-            duration: "20 horas"
-        },
-        "Swiss Arabian Shaghaf Oud": {
-            name: "Swiss Arabian Shaghaf Oud",
-            category: "Unisex",
-            price: 2100,
-            image: "./img/swiss-arabian-shaghaf.jpg",
-            description: "Fragancia oriental con notas de oud y rosas.",
-            tones: ["Oud", "Rosas", "Azafrán"],
-            topNotes: ["Oud", "Rosas"],
-            duration: "24+ horas"
+    }
+    
+    function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const activeCategory = document.querySelector('.filter-btn.active').getAttribute('data-category');
+        
+        let filteredProducts = products;
+        
+        if (activeCategory !== 'all') {
+            filteredProducts = products.filter(product => product.category === activeCategory);
         }
-    };
-
-    // Renderizar perfumes
-    function renderPerfumes(category = 'all', searchTerm = '') {
-        perfumesGrid.innerHTML = '';
         
-        Object.values(perfumesInventory).forEach(perfume => {
-            if(category !== 'all' && perfume.category !== getCategoryName(category)) return;
-            if(searchTerm && !perfume.name.toLowerCase().includes(searchTerm.toLowerCase())) return;
-            
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card animate-slide-up';
-            productCard.dataset.name = perfume.name;
-            
-            productCard.innerHTML = `
-                <div class="product-image">
-                    <img src="${perfume.image}" alt="${perfume.name}">
-                    <div class="product-actions">
-                        <div class="action-btn"><i class="fas fa-heart"></i></div>
-                        <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
-                        <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">${perfume.category}</span>
-                    <h3>${perfume.name}</h3>
-                    <div class="product-price">$<span class="current-price">${perfume.price.toLocaleString('es-MX')}</span> MXN</div>
-                    <a href="#" class="btn view-detail">Ver Detalles</a>
-                </div>
-            `;
-            
-            perfumesGrid.appendChild(productCard);
-        });
-    }
-
-    // Renderizar decants
-    function renderDecant() {
-        decantGrid.innerHTML = '';
+        if (searchTerm) {
+            filteredProducts = filteredProducts.filter(product => 
+                product.name.toLowerCase().includes(searchTerm)
+            );
+        }
         
-        Object.values(perfumesInventory).forEach(perfume => {
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card animate-slide-up';
-            productCard.dataset.name = perfume.name;
-            
-            productCard.innerHTML = `
-                <div class="product-image">
-                    <img src="${perfume.image}" alt="${perfume.name}">
-                    <div class="product-actions">
-                        <div class="action-btn"><i class="fas fa-heart"></i></div>
-                        <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
-                        <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">${perfume.category} - 30ml</span>
-                    <h3>${perfume.name}</h3>
-                    <div class="product-price">$<span class="current-price">350</span> MXN</div>
-                    <a href="#" class="btn view-detail">Ver Detalles</a>
-                </div>
-            `;
-            
-            decantGrid.appendChild(productCard);
-        });
+        noResults.style.display = filteredProducts.length === 0 ? 'block' : 'none';
+        renderProducts(filteredProducts, document.getElementById('perfumes-grid'));
     }
-
-    // Renderizar promociones
-    function renderPromotions() {
-        const promotionPerfumes = ["Fakhar Lattafa", "Lattafa Yara", "Swiss Arabian Shaghaf Oud"];
-        promotionsGrid.innerHTML = '';
-        
-        promotionPerfumes.forEach(name => {
-            const perfume = perfumesInventory[name];
-            if(!perfume) return;
-            
-            const discount = name === "Fakhar Lattafa" ? 0.25 : name === "Lattafa Yara" ? 0.20 : 0.15;
-            const discountedPrice = perfume.price * (1 - discount);
-            
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card animate-slide-up';
-            productCard.dataset.name = perfume.name;
-            
-            productCard.innerHTML = `
-                <div class="product-badge">${Math.round(discount * 100)}% OFF</div>
-                <div class="product-image">
-                    <img src="${perfume.image}" alt="${perfume.name}">
-                    <div class="product-actions">
-                        <div class="action-btn"><i class="fas fa-heart"></i></div>
-                        <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
-                        <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
-                    </div>
-                </div>
-                <div class="product-info">
-                    <span class="product-category">${perfume.category}</span>
-                    <h3>${perfume.name}</h3>
-                    <div class="product-price">
-                        <span class="original-price">$${perfume.price.toLocaleString('es-MX')}</span>
-                        <span class="discount-price">$${discountedPrice.toLocaleString('es-MX')}</span> MXN
-                    </div>
-                    <a href="#" class="btn view-detail">Ver Detalles</a>
-                </div>
-            `;
-            
-            promotionsGrid.appendChild(productCard);
-        });
-    }
-
-    // Mostrar detalle del producto
+    
     function showProductDetail(productName) {
-        const perfume = perfumesInventory[productName];
-        if(!perfume) return;
+        const product = [...products, ...decantProducts].find(p => p.name === productName);
+        if (!product) return;
         
-        const isDecantPage = document.querySelector('.nav-link[data-target="decant"].nav-active');
-        const price = isDecantPage ? 350 : perfume.price;
-        
-        detailContainer.innerHTML = `
+        const detailContent = document.getElementById('detail-content');
+        detailContent.innerHTML = `
             <div class="detail-image-container">
-                <img src="${perfume.image}" alt="${perfume.name}" class="detail-image">
+                <img src="${product.image}" alt="${product.name}" class="detail-image">
             </div>
             <div class="detail-info">
-                <span class="detail-category">${perfume.category}${isDecantPage ? ' - 30ml' : ''}</span>
-                <h1>${perfume.name}</h1>
-                <div class="detail-price">$${price.toLocaleString('es-MX')} MXN</div>
-                <p class="detail-description">${perfume.description}</p>
+                <span class="detail-category">${product.category === 'man' ? 'Hombre' : product.category === 'woman' ? 'Mujer' : 'Unisex'}</span>
+                <h2>${product.name}</h2>
+                <div class="detail-price">$${product.price.toLocaleString()} MXN</div>
+                <p class="detail-description">${product.description}</p>
+                <button class="btn add-to-cart-detail">Añadir al Carrito</button>
                 
                 <div class="detail-features">
                     <div class="feature-card">
                         <h4>Notas Olfativas</h4>
                         <ul class="feature-list">
-                            ${perfume.tones.map(tone => `<li>${tone}</li>`).join('')}
+                            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
                         </ul>
                     </div>
                     <div class="feature-card">
-                        <h4>Notas de Salida</h4>
+                        <h4>Durabilidad</h4>
                         <ul class="feature-list">
-                            ${perfume.topNotes.map(note => `<li>${note}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <div class="feature-card">
-                        <h4>Duración</h4>
-                        <ul class="feature-list">
-                            <li>${perfume.duration}</li>
+                            <li>${product.durability}</li>
                         </ul>
                     </div>
                 </div>
-                
-                <button class="btn add-to-cart-detail">Añadir al Carrito</button>
             </div>
         `;
         
-        document.querySelector('.add-to-cart-detail').addEventListener('click', () => {
-            addToCart({
-                ...perfume,
-                price: isDecantPage ? 350 : perfume.price
-            });
-        });
+        document.querySelector('.add-to-cart-detail').addEventListener('click', () => addToCart(product.name));
         
-        navigateTo('product-detail');
+        showScreen('product-detail');
     }
-
-    // Añadir al carrito
-    function addToCart(product) {
+    
+    function addToCart(productName) {
+        const product = [...products, ...decantProducts].find(p => p.name === productName);
+        if (!product) return;
+        
         const existingItem = cart.find(item => item.name === product.name);
         
-        if(existingItem) {
-            existingItem.quantity++;
+        if (existingItem) {
+            existingItem.quantity += 1;
         } else {
             cart.push({
                 name: product.name,
@@ -369,23 +320,53 @@ document.addEventListener('DOMContentLoaded', function() {
         cartIcon.classList.add('pulse');
         setTimeout(() => cartIcon.classList.remove('pulse'), 500);
     }
-
-    // Actualizar carrito
+    
+    function updateCartItemQuantity(productName, isIncrease) {
+        const item = cart.find(item => item.name === productName);
+        if (!item) return;
+        
+        if (isIncrease) {
+            item.quantity += 1;
+        } else {
+            item.quantity -= 1;
+            if (item.quantity <= 0) {
+                removeFromCart(productName);
+                return;
+            }
+        }
+        
+        updateCart();
+    }
+    
+    function removeFromCart(productName) {
+        cart = cart.filter(item => item.name !== productName);
+        updateCart();
+    }
+    
     function updateCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        renderCartItems();
+    }
+    
+    function updateCartCount() {
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCount.textContent = totalItems;
+    }
+    
+    function renderCartItems() {
         cartItemsContainer.innerHTML = '';
         
-        if(cart.length === 0) {
+        if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
             cartSubtotal.textContent = '$0.00 MXN';
             cartTotal.textContent = '$0.00 MXN';
-            cartCount.textContent = '0';
-            shippingFee.textContent = 'Gratis';
             return;
         }
         
         let subtotal = 0;
         
-        cart.forEach((item, index) => {
+        cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             subtotal += itemTotal;
             
@@ -397,12 +378,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="cart-item-details">
                     <div class="cart-item-title">${item.name}</div>
-                    <div class="cart-item-price">$${item.price.toLocaleString('es-MX')} MXN</div>
+                    <div class="cart-item-price">$${item.price.toLocaleString()} MXN</div>
                     <div class="cart-item-actions">
-                        <button class="quantity-btn minus" data-index="${index}">-</button>
+                        <button class="quantity-btn">-</button>
                         <span class="item-quantity">${item.quantity}</span>
-                        <button class="quantity-btn plus" data-index="${index}">+</button>
-                        <button class="remove-item" data-index="${index}"><i class="fas fa-trash"></i></button>
+                        <button class="quantity-btn">+</button>
+                        <button class="remove-item"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
             `;
@@ -410,160 +391,21 @@ document.addEventListener('DOMContentLoaded', function() {
             cartItemsContainer.appendChild(cartItem);
         });
         
-        const shippingCost = subtotal >= 1000 ? 0 : 150;
-        const total = subtotal + shippingCost;
-        
-        cartSubtotal.textContent = `$${subtotal.toLocaleString('es-MX')} MXN`;
-        shippingFee.textContent = shippingCost === 0 ? 'Gratis' : `$${shippingCost} MXN`;
-        cartTotal.textContent = `$${total.toLocaleString('es-MX')} MXN`;
-        cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-        
-        // Eventos de cantidad
-        document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.dataset.index);
-                if(cart[index].quantity > 1) {
-                    cart[index].quantity--;
-                    updateCart();
-                }
-            });
-        });
-        
-        document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.dataset.index);
-                cart[index].quantity++;
-                updateCart();
-            });
-        });
-        
-        // Eventos de eliminación
-        document.querySelectorAll('.remove-item').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.dataset.index);
-                cart.splice(index, 1);
-                updateCart();
-            });
-        });
+        cartSubtotal.textContent = `$${subtotal.toLocaleString()} MXN`;
+        cartTotal.textContent = `$${subtotal.toLocaleString()} MXN`;
     }
-
-    // Helper functions
-    function getCategoryName(category) {
-        const categories = {
-            'man': 'Hombre',
-            'woman': 'Mujer',
-            'unisex': 'Unisex'
-        };
-        return categories[category] || '';
-    }
-
-    // Delegación de eventos para elementos dinámicos
-    document.addEventListener('click', function(e) {
-        // Ver Detalle
-        if(e.target.classList.contains('view-detail') || 
-           e.target.closest('.view-detail-btn')) {
-            e.preventDefault();
-            const productCard = e.target.closest('.product-card');
-            if(productCard) showProductDetail(productCard.dataset.name);
-        }
-        
-        // Añadir al carrito
-        if(e.target.classList.contains('add-to-cart') || 
-           e.target.closest('.add-to-cart')) {
-            const productCard = e.target.closest('.product-card');
-            if(productCard) {
-                const perfume = perfumesInventory[productCard.dataset.name];
-                const isDecantPage = document.querySelector('.nav-link[data-target="decant"].nav-active');
-                
-                if(perfume) {
-                    addToCart({
-                        ...perfume,
-                        price: isDecantPage ? 350 : perfume.price
-                    });
-                }
+    
+    function handleRefresh() {
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('product-detail')) {
+            const productName = localStorage.getItem('currentProduct');
+            if (productName) {
+                showProductDetail(productName);
             }
         }
-    });
-
-    // Botón Volver
-    if(backToProducts) {
-        backToProducts.addEventListener('click', () => {
-            navigateTo('perfumes');
-        });
     }
-
-    // Filtros y búsqueda
-    if(filterBar) {
-        filterBar.addEventListener('click', (e) => {
-            if(e.target.classList.contains('filter-btn')) {
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn === e.target);
-                });
-                renderPerfumes(e.target.dataset.category);
-            }
-        });
-    }
-
-    if(searchInput) {
-        searchInput.addEventListener('input', () => {
-            const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
-            renderPerfumes(activeCategory, searchInput.value);
-        });
-    }
-
-    // Checkout
-    document.querySelector('.checkout-btn')?.addEventListener('click', () => {
-        if(cart.length === 0) return;
-        
-        const phoneNumber = "526621383780";
-        let message = "Carrito de Compra:\n\n";
-        
-        cart.forEach(item => {
-            message += `• ${item.name} (${item.quantity} unidad${item.quantity > 1 ? 'es' : ''}) - $${(item.price * item.quantity).toLocaleString('es-MX')} MXN\n`;
-        });
-        
-        const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        const shippingCost = subtotal >= 1000 ? 0 : 150;
-        const total = subtotal + shippingCost;
-        
-        message += `\nSubtotal: $${subtotal.toLocaleString('es-MX')} MXN`;
-        message += `\nEnv\u00edo: ${shippingCost === 0 ? 'Gratis' : '$' + shippingCost + ' MXN'}`;
-        message += `\nTotal: $${total.toLocaleString('es-MX')} MXN`;
-        
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-        
-        cart = [];
-        updateCart();
-        cartModal.classList.remove('active');
-    });
-
-    // Inicialización
-    function init() {
-        renderPerfumes();
-        renderDecant();
-        renderPromotions();
-        updateCart();
-        
-        // Políticas de WhatsApp
-        policyLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const policy = link.dataset.policy;
-                const messages = {
-                    'garantia': 'Garantía de Calidad',
-                    'durabilidad': 'Durabilidad del Olor',
-                    'certificacion': 'Certificación',
-                    'envio': 'Envío Seguro'
-                };
-                
-                if(messages[policy]) {
-                    const message = `Hola! Quisiera saber más acerca de su política de ${messages[policy]}`;
-                    window.open(`https://wa.me/526621383780?text=${encodeURIComponent(message)}`, '_blank');
-                }
-            });
-        });
-    }
-
+    
+    window.addEventListener('load', handleRefresh);
+    
     init();
 });
