@@ -909,6 +909,7 @@ footer {
 .quantity-btn:hover {
     background: var(--perfume-primary);
     color: var(--white);
+    transform: translateY(-5px);
 }
 
 .item-quantity {
@@ -1185,7 +1186,22 @@ footer {
         z-index: 2000;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
         padding: 10px 0;
-        padding-bottom: 40px;
+        padding-bottom: 20px;
+    }
+
+    header::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: white;
+        z-index: 10;
+    }
+
+    .app-container {
+        padding-top: 20px;
     }
 
     nav {
@@ -1288,7 +1304,7 @@ footer {
     }
     
     .section-title {
-        margin-top: 0;
+        margin-top: -20px;
         margin-bottom: 40px;
         padding-top: 20px;
     }
@@ -1325,7 +1341,21 @@ footer {
         gap: 5px;
     }
 
-    /* FIX para sección de políticas */
+    .screen > section:first-child {
+        padding-top: 20px;
+    }
+
+    #promotions .promo-image-mobile {
+        display: block;
+        width: 100%;
+        height: 300px;
+        background-image: url('./img/promo.png');
+        background-size: cover;
+        background-position: center;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
     #policies .section-title {
         padding-top: 50px;
         margin-top: 0;
@@ -1333,5 +1363,11 @@ footer {
     
     #policies .policies-grid {
         padding-top: 20px;
+    }
+}
+
+@media (min-width: 769px) {
+    #promotions .promo-image-mobile {
+        display: none;
     }
 }
