@@ -43,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         nav.classList.remove('active');
+        
+        if(screenId === 'product-detail') {
+            window.scrollTo(0, 0);
+        }
     }
 
     navLinks.forEach(link => {
@@ -494,6 +498,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         navigateTo('product-detail');
+        window.scrollTo(0, 0);
     }
 
     function addToCart(product) {
