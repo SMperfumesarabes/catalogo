@@ -14,11 +14,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const whatsappBtn = document.querySelector('.whatsapp-btn');
     const backToProductsBtn = document.querySelector('.back-to-products');
     const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search');
     const noResults = document.querySelector('.no-results');
     const filterBtns = document.querySelectorAll('.filter-btn');
     const exploreBtn = document.getElementById('explore-btn');
     const homeLogo = document.getElementById('home-logo');
     const footerLogo = document.getElementById('footer-logo');
+    const appointmentForm = document.getElementById('appointment-form');
     
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let currentScreen = localStorage.getItem('currentScreen') || 'home';
@@ -31,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCartCount();
         showScreen(currentScreen);
         
-        // Verificar si debemos mostrar detalle de producto al cargar
         if (currentScreen === 'product-detail') {
             const productName = localStorage.getItem('currentProduct');
             if (productName) {
@@ -42,12 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function loadProducts() {
         products = [
-            // HOMBRE
             {
                 id: 1,
                 name: "Stallion 53 Linea Emper",
                 category: "man",
                 price: 2200,
+                discountedPrice: 1870,
+                discount: 15,
                 image: "./img/stallion53.png",
                 description: "Fragancia para hombre de la línea Emper, con notas frescas y amaderadas que evocan fuerza y elegancia.",
                 features: ["Notas de salida: Bergamota, Cardamomo", "Notas de corazón: Cedro, Pimienta", "Notas de fondo: Ámbar, Cuero"],
@@ -143,12 +145,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 features: ["Notas de salida: Bergamota, Lavanda", "Notas de corazón: Canela, Pimienta", "Notas de fondo: Ámbar, Sándalo"],
                 durability: "8-10 horas"
             },
-            // MUJER
             {
                 id: 11,
                 name: "Yara Lattafa",
                 category: "woman",
                 price: 1650,
+                discountedPrice: 1320,
+                discount: 20,
                 image: "./img/yara.png",
                 description: "Fragancia floral frutal para mujer con notas de frutas tropicales y flores blancas.",
                 features: ["Notas de salida: Frutas tropicales", "Notas de corazón: Flores blancas", "Notas de fondo: Vainilla, Almizcle"],
@@ -244,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 features: ["Notas de salida: Azafrán, Frutas", "Notas de corazón: Flores, Vainilla", "Notas de fondo: Ámbar, Almizcle"],
                 durability: "10-12 horas"
             },
-            // UNISEX
             {
                 id: 21,
                 name: "Hayaati Gold Elixir Lattafa",
@@ -280,6 +282,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "La escencia de Karol G",
                 category: "unisex",
                 price: 2300,
+                discountedPrice: 1725,
+                discount: 25,
                 image: "./img/karol-g.png",
                 description: "Fragancia inspirada en Karol G, con notas tropicales y vibrantes.",
                 features: ["Notas de salida: Frutas tropicales, Cítricos", "Notas de corazón: Flores, Vainilla", "Notas de fondo: Ámbar, Maderas"],
@@ -287,19 +291,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         ];
         
-        decantProducts = products.map(product => ({
+        decantProducts = [
+            products.find(p => p.name === "Fahkar Lattafa"),
+            products.find(p => p.name === "Asad Lattafa"),
+            products.find(p => p.name === "Yara Candy Lattafa"),
+            products.find(p => p.name === "Ana Rouge Lattafa"),
+            products.find(p => p.name === "Khamrah Lattafa")
+        ].map(product => ({
             ...product,
-            price: Math.round(product.price * 0.3),
-            name: `${product.name} `
+            price: 350,
+            name: `${product.name} (DECANT)`
         }));
         
-        // Renderizar todos los perfumes en la página de perfumes (sin badges)
         renderProducts(products, document.getElementById('perfumes-grid'), false);
-        
-        // Renderizar decants en su página (sin badges)
         renderProducts(decantProducts, document.getElementById('decant-grid'), false);
         
-        // Para la página principal: mostrar solo Al noble waazer (hombre), Yara Candy (mujer), Khamrah Qawa (unisex) CON BADGES
         const featuredProducts = products.filter(p => 
             p.name === "Al Noble Waazer Lattafa" || 
             p.name === "Yara Candy Lattafa" || 
@@ -307,24 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
         );
         renderProducts(featuredProducts, document.querySelector('.products-grid'), true);
         
-        // Para la página de promociones: asignar descuentos a los productos (sin badges)
-        const promotionProducts = products.map(p => {
-            // Crear una copia para no modificar el original
-            const product = {...p};
-            // Aplicar descuentos
-            if (product.name === "Stallion 53 Linea Emper") {
-                product.discount = 15;
-                product.discountedPrice = Math.round(product.price * (1 - 0.15));
-            } else if (product.name === "Yara Lattafa") {
-                product.discount = 20;
-                product.discountedPrice = Math.round(product.price * (1 - 0.20));
-            } else if (product.name === "La escencia de Karol G") {
-                product.discount = 25;
-                product.discountedPrice = Math.round(product.price * (1 - 0.25));
-            }
-            return product;
-        }).filter(p => p.discount); // Solo los que tienen descuento
-        
+        const promotionProducts = products.filter(p => p.discount);
         renderProducts(promotionProducts, document.getElementById('promotions-grid'), false);
     }
 
@@ -345,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let badgeHTML = '';
             if (showBadges) {
-                // Solo en la página principal mostramos badges
                 if (product.name === "Al Noble Waazer Lattafa") {
                     badgeHTML = '<div class="product-badge">Nuevo</div>';
                 } else if (product.name === "Yara Candy Lattafa") {
@@ -360,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 priceHTML = `
                     <div class="product-price">
                         <span class="original-price">$${product.price.toLocaleString()}</span>
-                        $<span class="discount-price">${product.discountedPrice.toLocaleString()}</span> MXN
+                        <span class="discount-price">$${product.discountedPrice.toLocaleString()}</span> MXN
                         <div class="discount-badge">-${product.discount}%</div>
                     </div>
                 `;
@@ -392,18 +380,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function setupEventListeners() {
-        // Logo click event
         homeLogo.addEventListener('click', function(e) {
             e.preventDefault();
             const target = 'home';
             setCurrentScreen(target);
             showScreen(target);
-            
             navLinks.forEach(l => l.classList.remove('nav-active'));
             document.querySelector('.nav-link[data-target="home"]').classList.add('nav-active');
         });
         
-        // Footer logo click event
         footerLogo.addEventListener('click', function(e) {
             e.preventDefault();
             const target = 'home';
@@ -443,7 +428,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         checkoutBtn.addEventListener('click', function() {
-            alert('Procediendo al pago...');
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            let message = "¡Hola! Quiero realizar la siguiente compra:%0A%0A";
+            let total = 0;
+            let hasDecant = false;
+
+            cart.forEach(item => {
+                const product = [...products, ...decantProducts].find(p => p.name === item.name);
+                const isDecant = decantProducts.some(p => p.name === item.name);
+                if (isDecant) hasDecant = true;
+
+                const itemPrice = product.discountedPrice || product.price;
+                const itemTotal = itemPrice * item.quantity;
+                total += itemTotal;
+
+                message += `- ${item.name}${isDecant ? ' (DECANT)' : ''}: ${item.quantity} unidad(es) - $${itemTotal.toLocaleString()} MXN%0A`;
+            });
+
+            message += `%0ATotal: $${total.toLocaleString()} MXN%0A%0A`;
+            message += "Por favor, necesito información para proceder al pago. Gracias";
+
+            if (hasDecant) {
+                message += "%0A%0A*Nota: Los productos marcados con 'DECANT' son fragancias en formato de 30ml.*";
+            }
+
+            window.open(`https://wa.me/526622293879?text=${message}`, '_blank');
         });
         
         whatsappBtn.addEventListener('click', function() {
@@ -463,11 +476,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const target = 'perfumes';
                 setCurrentScreen(target);
                 showScreen(target);
-                
                 navLinks.forEach(l => l.classList.remove('nav-active'));
                 document.querySelector(`.nav-link[data-target="${target}"]`).classList.add('nav-active');
             });
         }
+        
+        clearSearchBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterProducts();
+        });
         
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
@@ -512,6 +529,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 filterProducts();
             });
         });
+        
+        if (appointmentForm) {
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    date: document.getElementById('date').value,
+                    message: document.getElementById('message').value
+                };
+                
+                const subject = "Cita Privada - Perfumes Árabes";
+                const body = `Nombre: ${formData.name}%0AEmail: ${formData.email}%0ATeléfono: ${formData.phone}%0AFecha: ${formData.date}%0AMensaje: ${formData.message}`;
+                
+                window.open(`mailto:smperfumesarabes@gmail.com?subject=${subject}&body=${body}`, '_blank');
+                this.reset();
+                alert('¡Gracias! Hemos recibido tu solicitud de cita.');
+            });
+        }
     }
     
     function setCurrentScreen(screen) {
@@ -562,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const product = [...products, ...decantProducts].find(p => p.name === productName);
         if (!product) return;
         
-        localStorage.setItem('currentProduct', productName);
+        localStorage.setItem('currentProduct', product.name);
         setCurrentScreen('product-detail');
         
         const detailContent = document.getElementById('detail-content');
@@ -573,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="detail-info">
                 <span class="detail-category">${product.category === 'man' ? 'Hombre' : product.category === 'woman' ? 'Mujer' : 'Unisex'}</span>
                 <h2>${product.name}</h2>
-                <div class="detail-price">$${product.price.toLocaleString()} MXN</div>
+                <div class="detail-price">$${product.discountedPrice ? product.discountedPrice.toLocaleString() : product.price.toLocaleString()} MXN</div>
                 <p class="detail-description">${product.description}</p>
                 <button class="btn add-to-cart-detail">Añadir al Carrito</button>
                 
@@ -595,7 +632,6 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         document.querySelector('.add-to-cart-detail').addEventListener('click', () => addToCart(product.name));
-        
         showScreen('product-detail');
     }
     
@@ -610,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             cart.push({
                 name: product.name,
-                price: product.price,
+                price: product.discountedPrice || product.price,
                 image: product.image,
                 quantity: 1
             });
