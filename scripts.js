@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Stallion 53 Linea Emper",
                 category: "man",
                 price: 2200,
-                image: "./img/stallion53.jpg",
+                image: "./img/stallion53.png",
                 description: "Fragancia para hombre de la línea Emper, con notas frescas y amaderadas que evocan fuerza y elegancia.",
                 features: ["Notas de salida: Bergamota, Cardamomo", "Notas de corazón: Cedro, Pimienta", "Notas de fondo: Ámbar, Cuero"],
                 durability: "8-10 horas"
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Fahkar Lattafa",
                 category: "man",
                 price: 1850,
-                image: "./img/fahkar.jpg",
+                image: "./img/fahkar.png",
                 description: "Un perfume árabe intenso para hombre con notas de cuero y especias, ideal para la noche.",
                 features: ["Notas de salida: Lavanda, Bergamota", "Notas de corazón: Cuero, Canela", "Notas de fondo: Vainilla, Ámbar"],
                 durability: "10-12 horas"
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Fahkar Gold Lattafa",
                 category: "man",
                 price: 1950,
-                image: "./img/fahkar-gold.jpg",
+                image: "./img/fahkar-gold.png",
                 description: "Versión premium de Fahkar, con toques de oro en su esencia, más dulce y sofisticada.",
                 features: ["Notas de salida: Bergamota, Limón", "Notas de corazón: Canela, Rosa", "Notas de fondo: Vainilla, Ámbar, Almizcle"],
                 durability: "12+ horas"
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Hayaati Gold Elixir Lattafa",
                 category: "man",
                 price: 2100,
-                image: "./img/hayaati-gold-elixir.jpg",
+                image: "./img/hayaati-gold-elixir.png",
                 description: "Elixir dorado para hombre con una mezcla de notas frescas y amaderadas, con un toque de lujo.",
                 features: ["Notas de salida: Manzana, Bergamota", "Notas de corazón: Vainilla, Canela", "Notas de fondo: Ámbar, Sándalo"],
                 durability: "10-12 horas"
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Asad Lattafa",
                 category: "man",
                 price: 1900,
-                image: "./img/asad.jpg",
+                image: "./img/asad.png",
                 description: "Un perfume árabe fuerte y especiado para el hombre moderno y audaz.",
                 features: ["Notas de salida: Pimienta negra, Bergamota", "Notas de corazón: Vainilla, Canela", "Notas de fondo: Ámbar, Tabaco"],
                 durability: "8-10 horas"
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Asad Zanzibar Lattafa",
                 category: "man",
                 price: 2000,
-                image: "./img/asad-zanzibar.jpg",
+                image: "./img/asad-zanzibar.png",
                 description: "Versión exótica de Asad con notas tropicales de Zanzíbar, fresca y envolvente.",
                 features: ["Notas de salida: Cítricos, Menta", "Notas de corazón: Vainilla, Especias", "Notas de fondo: Ámbar, Maderas"],
                 durability: "8-10 horas"
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Qaed Al Fursan Lattafa",
                 category: "man",
                 price: 1800,
-                image: "./img/qaed-al-fursan.jpg",
+                image: "./img/qaed-al-fursan.png",
                 description: "Fragancia para el caballero moderno, con notas afrutadas y amaderadas.",
                 features: ["Notas de salida: Piña, Bergamota", "Notas de corazón: Rosa, Manzana", "Notas de fondo: Vainilla, Sándalo"],
                 durability: "6-8 horas"
@@ -118,17 +118,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Maahir Lattafa",
                 category: "man",
                 price: 1750,
-                image: "./img/maahir.jpg",
+                image: "./img/maahir.png",
                 description: "Perfil fresco y acuático para el hombre activo y dinámico.",
                 features: ["Notas de salida: Manzana, Lavanda", "Notas de corazón: Vainilla, Canela", "Notas de fondo: Almizcle, Ámbar"],
                 durability: "6-8 horas"
             },
             {
                 id: 9,
-                name: "Ameerat Al Arab (Caballero) Linea Asdaaf",
+                name: "Ameerat Al Arab",
                 category: "man",
                 price: 2300,
-                image: "./img/ameerat-al-arab.jpg",
+                image: "./img/ameerat-al-arab.png",
                 description: "Un perfume de lujo para el caballero árabe, con notas intensas y duraderas.",
                 features: ["Notas de salida: Bergamota, Cardamomo", "Notas de corazón: Cuero, Canela", "Notas de fondo: Vainilla, Ámbar"],
                 durability: "12+ horas"
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Al Noble Waazer Lattafa",
                 category: "man",
                 price: 1950,
-                image: "./img/al-noble-waazer.jpg",
+                image: "./img/al-noble-waazer.png",
                 description: "Fragancia noble y sofisticada con notas amaderadas y especiadas.",
                 features: ["Notas de salida: Bergamota, Lavanda", "Notas de corazón: Canela, Pimienta", "Notas de fondo: Ámbar, Sándalo"],
                 durability: "8-10 horas"
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Yara Lattafa",
                 category: "woman",
                 price: 1650,
-                image: "./img/yara.jpg",
+                image: "./img/yara.png",
                 description: "Fragancia floral frutal para mujer con notas de frutas tropicales y flores blancas.",
                 features: ["Notas de salida: Frutas tropicales", "Notas de corazón: Flores blancas", "Notas de fondo: Vainilla, Almizcle"],
                 durability: "6-8 horas"
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Yara Candy Lattafa",
                 category: "woman",
                 price: 1700,
-                image: "./img/yara-candy.jpg",
+                image: "./img/yara-candy.png",
                 description: "Versión dulce de Yara, con notas de caramelo y frutas, ideal para el día.",
                 features: ["Notas de salida: Frambuesa, Caramelo", "Notas de corazón: Vainilla, Jazmín", "Notas de fondo: Almizcle, Sándalo"],
                 durability: "6-8 horas"
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Yara Moi Lattafa",
                 category: "woman",
                 price: 1750,
-                image: "./img/yara-moi.jpg",
+                image: "./img/yara-moi.png",
                 description: "Interpretación más intensa y cremosa de Yara, con notas de leche y frutas.",
                 features: ["Notas de salida: Frutas rojas, Leche", "Notas de corazón: Flores blancas, Vainilla", "Notas de fondo: Almizcle, Sándalo"],
                 durability: "8-10 horas"
@@ -179,17 +179,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Ana Rouge Lattafa",
                 category: "woman",
                 price: 1800,
-                image: "./img/ana-rouge.jpg",
+                image: "./img/ana-rouge.png",
                 description: "Fragancia floral oriental con toques frutales, elegante y sofisticada.",
                 features: ["Notas de salida: Pera, Bergamota", "Notas de corazón: Rosa, Jazmín", "Notas de fondo: Vainilla, Almizcle"],
                 durability: "8-10 horas"
             },
             {
                 id: 15,
-                name: "La Vivacite Maison Alhambra",
+                name: "La Vivacite Maison",
                 category: "woman",
                 price: 1900,
-                image: "./img/la-vivacite.jpg",
+                image: "./img/la-vivacite.png",
                 description: "Perfume fresco y vivaz para la mujer alegre y llena de energía.",
                 features: ["Notas de salida: Cítricos, Frutas", "Notas de corazón: Flores blancas, Muguete", "Notas de fondo: Almizcle, Vainilla"],
                 durability: "6-8 horas"
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Leonie Maison Alhambra",
                 category: "woman",
                 price: 1850,
-                image: "./img/leonie.jpg",
+                image: "./img/leonie.png",
                 description: "Fragancia floral suave y femenina, con un toque moderno y fresco.",
                 features: ["Notas de salida: Bergamota, Grosella", "Notas de corazón: Rosa, Peonía", "Notas de fondo: Almizcle, Vainilla"],
                 durability: "6-8 horas"
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Mayar Lattafa",
                 category: "woman",
                 price: 1700,
-                image: "./img/mayar.jpg",
+                image: "./img/mayar.png",
                 description: "Un aroma frutal floral con notas jugosas y un fondo cremoso.",
                 features: ["Notas de salida: Frutas rojas, Pera", "Notas de corazón: Flores, Vainilla", "Notas de fondo: Almizcle, Sándalo"],
                 durability: "8-10 horas"
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Mayar Menta Lattafa",
                 category: "woman",
                 price: 1750,
-                image: "./img/mayar-menta.jpg",
+                image: "./img/mayar-menta.png",
                 description: "Mayar con un toque de menta fresca, ideal para días calurosos.",
                 features: ["Notas de salida: Menta, Frutas cítricas", "Notas de corazón: Flores, Vainilla", "Notas de fondo: Almizcle, Sándalo"],
                 durability: "6-8 horas"
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Haya Lattafa",
                 category: "woman",
                 price: 1650,
-                image: "./img/haya.jpg",
+                image: "./img/haya.png",
                 description: "Fragancia floral con notas de frutas y un fondo dulce y amaderado.",
                 features: ["Notas de salida: Frutas tropicales", "Notas de corazón: Flores, Vainilla", "Notas de fondo: Almizcle, Sándalo"],
                 durability: "6-8 horas"
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Her Confession Lattafa",
                 category: "woman",
                 price: 1950,
-                image: "./img/her-confession.jpg",
+                image: "./img/her-confession.png",
                 description: "Perfume oriental floral para la mujer misteriosa y seductora.",
                 features: ["Notas de salida: Azafrán, Frutas", "Notas de corazón: Flores, Vainilla", "Notas de fondo: Ámbar, Almizcle"],
                 durability: "10-12 horas"
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Hayaati Gold Elixir Lattafa",
                 category: "unisex",
                 price: 2100,
-                image: "./img/hayaati-gold-elixir.jpg",
+                image: "./img/hayaati-gold-elixir.png",
                 description: "Elixir dorado con una mezcla de notas frescas y amaderadas, unisex.",
                 features: ["Notas de salida: Manzana, Bergamota", "Notas de corazón: Vainilla, Canela", "Notas de fondo: Ámbar, Sándalo"],
                 durability: "10-12 horas"
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Khamrah Lattafa",
                 category: "unisex",
                 price: 2000,
-                image: "./img/khamrah.jpg",
+                image: "./img/khamrah.png",
                 description: "Fragancia gourmand con notas de vainilla, canela y licor, cálida y acogedora.",
                 features: ["Notas de salida: Canela, Vainilla", "Notas de corazón: Flor de naranjo, Almendra", "Notas de fondo: Ámbar, Sándalo"],
                 durability: "12+ horas"
@@ -270,17 +270,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 name: "Khamrah Qawa Lattafa",
                 category: "unisex",
                 price: 2050,
-                image: "./img/khamrah-qawa.jpg",
+                image: "./img/khamrah-qawa.png",
                 description: "Versión intensa de Khamrah con notas de café, para los amantes de lo fuerte y dulce.",
                 features: ["Notas de salida: Café, Canela", "Notas de corazón: Vainilla, Flor de naranjo", "Notas de fondo: Ámbar, Sándalo"],
                 durability: "12+ horas"
             },
             {
                 id: 24,
-                name: "Karol G Metropolis De Emper",
+                name: "La escencia de Karol G",
                 category: "unisex",
                 price: 2300,
-                image: "./img/karol-g.jpg",
+                image: "./img/karol-g.png",
                 description: "Fragancia inspirada en Karol G, con notas tropicales y vibrantes.",
                 features: ["Notas de salida: Frutas tropicales, Cítricos", "Notas de corazón: Flores, Vainilla", "Notas de fondo: Ámbar, Maderas"],
                 durability: "8-10 horas"
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
         decantProducts = products.map(product => ({
             ...product,
             price: Math.round(product.price * 0.3),
-            name: `${product.name} (Decant 30ml)`
+            name: `${product.name} `
         }));
         
         // Renderizar todos los perfumes en la página de perfumes (sin badges)
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (product.name === "Yara Lattafa") {
                 product.discount = 20;
                 product.discountedPrice = Math.round(product.price * (1 - 0.20));
-            } else if (product.name === "Karol G Metropolis De Emper") {
+            } else if (product.name === "La escencia de Karol G") {
                 product.discount = 25;
                 product.discountedPrice = Math.round(product.price * (1 - 0.25));
             }
