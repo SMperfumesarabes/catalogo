@@ -16,9 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-input');
     const noResults = document.querySelector('.no-results');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const exploreBtn = document.getElementById('explore-btn');
+    const homeLogo = document.getElementById('home-logo');
+    const footerLogo = document.getElementById('footer-logo');
     
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let currentScreen = 'home';
+    let currentScreen = localStorage.getItem('currentScreen') || 'home';
     let products = [];
     let decantProducts = [];
     
@@ -27,6 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setupEventListeners();
         updateCartCount();
         showScreen(currentScreen);
+        
+        // Verificar si debemos mostrar detalle de producto al cargar
+        if (currentScreen === 'product-detail') {
+            const productName = localStorage.getItem('currentProduct');
+            if (productName) {
+                showProductDetail(productName);
+            }
+        }
     }
     
     function loadProducts() {
@@ -37,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 category: "man",
                 price: 1850,
                 image: "./img/lattafa-raghba-men.jpg",
-                description: "Una fragancia oriental amaderada para hombre que combina notas de vainilla, ámbar y sándalo.",
+                description: "Una fragancia oriental amaderada para hombre que combina notas de vainilla, ámbar y sándalo con un toque moderno. Ideal para ocasiones nocturnas y eventos especiales.",
                 features: ["Notas de salida: Bergamota, Cardamomo", "Notas de corazón: Vainilla, Ámbar", "Notas de fondo: Sándalo, Pachulí"],
                 durability: "8-10 horas"
             },
@@ -47,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 category: "woman",
                 price: 1650,
                 image: "./img/lattafa-yara.jpg",
-                description: "Una fragancia floral frutal para mujer con notas de frutas tropicales y flores blancas.",
+                description: "Una fragancia floral frutal para mujer con notas de frutas tropicales y flores blancas. Perfecta para el día a día y reuniones sociales.",
                 features: ["Notas de salida: Frutas tropicales", "Notas de corazón: Flores blancas", "Notas de fondo: Vainilla, Almizcle"],
                 durability: "6-8 horas"
             },
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 category: "unisex",
                 price: 2100,
                 image: "./img/swiss-arabian-shaghaf.jpg",
-                description: "Una fragancia oriental amaderada unisex con notas de oud, azafrán y rosas.",
+                description: "Una fragancia oriental amaderada unisex con notas de oud, azafrán y rosas. Una experiencia olfativa intensa y duradera.",
                 features: ["Notas de salida: Azafrán, Cardamomo", "Notas de corazón: Rosa, Oud", "Notas de fondo: Ámbar, Sándalo"],
                 durability: "10-12 horas"
             },
@@ -67,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 category: "man",
                 price: 1950,
                 image: "./img/rasasi-hawas.jpg",
-                description: "Una fragancia acuática aromática para hombre con notas de manzana, lavanda y ámbar.",
+                description: "Una fragancia acuática aromática para hombre con notas de manzana, lavanda y ámbar. Fresca y vigorizante para uso diario.",
                 features: ["Notas de salida: Manzana, Bergamota", "Notas de corazón: Lavanda, Pimienta", "Notas de fondo: Ámbar, Almizcle"],
                 durability: "8-10 horas"
             },
@@ -77,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 category: "woman",
                 price: 1750,
                 image: "./img/lattafa-ana-abiyedh.jpg",
-                description: "Una fragancia floral frutal para mujer con notas de pera, lirio y almizcle.",
+                description: "Una fragancia floral frutal para mujer con notas de pera, lirio y almizcle. Elegante y sofisticada para ocasiones especiales.",
                 features: ["Notas de salida: Pera, Bergamota", "Notas de corazón: Lirio, Jazmín", "Notas de fondo: Almizcle, Vainilla"],
                 durability: "6-8 horas"
             },
@@ -87,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 category: "unisex",
                 price: 2250,
                 image: "./img/al-haramain-amber-oud.jpg",
-                description: "Una fragancia oriental amaderada unisex con notas de oud, ámbar y vainilla.",
+                description: "Una fragancia oriental amaderada unisex con notas de oud, ámbar y vainilla. Lujosa y exótica para quienes buscan algo único.",
                 features: ["Notas de salida: Azafrán, Cardamomo", "Notas de corazón: Oud, Rosa", "Notas de fondo: Ámbar, Vainilla"],
                 durability: "12+ horas"
             }
@@ -106,12 +117,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function setupEventListeners() {
+        // Logo click event
+        homeLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            setCurrentScreen('home');
+            showScreen('home');
+            navLinks.forEach(l => l.classList.remove('nav-active'));
+            document.querySelector('.nav-link[data-target="home"]').classList.add('nav-active');
+        });
+        
+        // Footer logo click event
+        footerLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            setCurrentScreen('home');
+            showScreen('home');
+            navLinks.forEach(l => l.classList.remove('nav-active'));
+            document.querySelector('.nav-link[data-target="home"]').classList.add('nav-active');
+        });
+        
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = this.getAttribute('data-target');
+                setCurrentScreen(target);
                 showScreen(target);
-                currentScreen = target;
                 
                 navLinks.forEach(l => l.classList.remove('nav-active'));
                 this.classList.add('nav-active');
@@ -146,31 +175,44 @@ document.addEventListener('DOMContentLoaded', function() {
         
         backToProductsBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            showScreen(currentScreen);
+            setCurrentScreen('perfumes');
+            showScreen('perfumes');
         });
         
+        if (exploreBtn) {
+            exploreBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = 'perfumes';
+                setCurrentScreen(target);
+                showScreen(target);
+                
+                navLinks.forEach(l => l.classList.remove('nav-active'));
+                document.querySelector(`.nav-link[data-target="${target}"]`).classList.add('nav-active');
+            });
+        }
+        
         document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-to-cart')) {
+            if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
                 const productCard = e.target.closest('.product-card');
                 const productName = productCard.getAttribute('data-name');
                 addToCart(productName);
             }
             
-            if (e.target.classList.contains('view-detail-btn') || e.target.classList.contains('view-detail')) {
+            if (e.target.classList.contains('view-detail-btn') || e.target.classList.contains('view-detail') || e.target.closest('.view-detail-btn') || e.target.closest('.view-detail')) {
                 e.preventDefault();
                 const productCard = e.target.closest('.product-card');
                 const productName = productCard.getAttribute('data-name');
                 showProductDetail(productName);
             }
             
-            if (e.target.classList.contains('quantity-btn')) {
+            if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
                 const cartItem = e.target.closest('.cart-item');
                 const productName = cartItem.querySelector('.cart-item-title').textContent;
-                const isIncrease = e.target.textContent === '+';
+                const isIncrease = e.target.textContent === '+' || (e.target.closest('.quantity-btn') && e.target.closest('.quantity-btn').textContent === '+');
                 updateCartItemQuantity(productName, isIncrease);
             }
             
-            if (e.target.classList.contains('remove-item')) {
+            if (e.target.classList.contains('remove-item') || e.target.closest('.remove-item')) {
                 const cartItem = e.target.closest('.cart-item');
                 const productName = cartItem.querySelector('.cart-item-title').textContent;
                 removeFromCart(productName);
@@ -194,6 +236,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    function setCurrentScreen(screen) {
+        currentScreen = screen;
+        localStorage.setItem('currentScreen', screen);
+    }
+    
     function showScreen(screenId) {
         screens.forEach(screen => {
             screen.classList.remove('active');
@@ -201,8 +248,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         const targetScreen = document.getElementById(screenId);
-        targetScreen.style.display = 'block';
-        setTimeout(() => targetScreen.classList.add('active'), 10);
+        if (targetScreen) {
+            targetScreen.style.display = 'block';
+            setTimeout(() => targetScreen.classList.add('active'), 10);
+        }
         
         if (screenId === 'perfumes') {
             filterProducts();
@@ -214,6 +263,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderProducts(productsArray, container) {
         container.innerHTML = '';
         
+        if (productsArray.length === 0) {
+            noResults.style.display = 'block';
+            return;
+        }
+        
+        noResults.style.display = 'none';
+        
         productsArray.forEach(product => {
             const productCard = document.createElement('div');
             productCard.className = 'product-card animate-slide-up';
@@ -224,7 +280,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
                     <div class="product-actions">
-                        <div class="action-btn"><i class="fas fa-heart"></i></div>
                         <div class="action-btn add-to-cart"><i class="fas fa-shopping-bag"></i></div>
                         <div class="action-btn view-detail-btn"><i class="fas fa-search"></i></div>
                     </div>
@@ -264,6 +319,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function showProductDetail(productName) {
         const product = [...products, ...decantProducts].find(p => p.name === productName);
         if (!product) return;
+        
+        localStorage.setItem('currentProduct', productName);
+        setCurrentScreen('product-detail');
         
         const detailContent = document.getElementById('detail-content');
         detailContent.innerHTML = `
@@ -394,18 +452,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cartSubtotal.textContent = `$${subtotal.toLocaleString()} MXN`;
         cartTotal.textContent = `$${subtotal.toLocaleString()} MXN`;
     }
-    
-    function handleRefresh() {
-        const currentPath = window.location.pathname;
-        if (currentPath.includes('product-detail')) {
-            const productName = localStorage.getItem('currentProduct');
-            if (productName) {
-                showProductDetail(productName);
-            }
-        }
-    }
-    
-    window.addEventListener('load', handleRefresh);
     
     init();
 });
