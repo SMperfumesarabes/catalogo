@@ -54,18 +54,44 @@
         </div>
 
         <div class="screen active" id="home">
-            <section class="hero">
-                <div class="container">
+            <section class="hero" id="home-hero">
+                <div class="hero-media" aria-hidden="true">
+                    <video
+                        class="hero-video"
+                        id="hero-video"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="./img/banner.png"
+                    >
+                        <source src="./img/armaf-club-de-nuit.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-veil"></div>
+                </div>
+
+                <div class="hero-stage">
                     <div class="hero-content">
+                        <p class="hero-brand animate-fade-in">SyM</p>
                         <h1 class="animate-fade-in">El arte de las fragancias Árabes</h1>
-                        <p class="animate-fade-in">Descubre nuestra exclusiva colección de perfumes árabes, elaborados con los ingredientes más finos para capturar momentos inolvidables con elegancia atemporal.</p>
-                        <a href="#" class="btn animate-fade-in" id="explore-btn">Explorar Colección</a>
+                        <p class="animate-fade-in">Intensidad, lujo y carácter en cada nota. Descubre la colección que define tu presencia.</p>
+                        <div class="hero-cta animate-fade-in">
+                            <a href="#" class="btn btn-hero" id="explore-btn">Explorar Colección</a>
+                        </div>
                     </div>
                 </div>
-                <div class="hero-image" style="background-image: url('./img/banner.png')"></div>
+
+                <button type="button" class="hero-sound" id="hero-sound" aria-label="Activar sonido del video" aria-pressed="false">
+                    <i class="fas fa-volume-mute" aria-hidden="true"></i>
+                </button>
+
+                <a href="#home-featured" class="hero-scroll" aria-label="Ver colección destacada">
+                    <span></span>
+                </a>
             </section>
 
-            <section class="perfumes">
+            <section class="perfumes" id="home-featured">
                 <div class="container">
                     <div class="section-title">
                         <h2 class="animate-fade-in">Colección Destacada</h2>
@@ -179,7 +205,7 @@
                             </div>
                             <h3>Garantía de Calidad</h3>
                             <p>Todos nuestros perfumes son 100% originales y de la más alta calidad. Los mejores aceites esenciales.</p>
-                            <a href="https://wa.me/526622293879?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Garantía%20de%20Calidad" class="btn btn-outline policy-link" data-policy="garantia">Saber más</a>
+                            <a href="https://wa.me/526621383780?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Garantía%20de%20Calidad" class="btn btn-outline policy-link" data-policy="garantia">Saber más</a>
                         </div>
                         
                         <div class="policy-card animate-slide-up">
@@ -188,7 +214,7 @@
                             </div>
                             <h3>Durabilidad del Olor</h3>
                             <p>Te garantizamos la durabilidad de tu perfume. En "Ver Detalle" puedes ver la durabilidad de cada uno.</p>
-                            <a href="https://wa.me/526622293879?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Durabilidad%20del%20Olor" class="btn btn-outline policy-link" data-policy="durabilidad">Saber más</a>
+                            <a href="https://wa.me/526621383780?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Durabilidad%20del%20Olor" class="btn btn-outline policy-link" data-policy="durabilidad">Saber más</a>
                         </div>
                         
                         <div class="policy-card animate-slide-up">
@@ -197,7 +223,7 @@
                             </div>
                             <h3>Certificación</h3>
                             <p>Todos nuestros productos cuentan con certificación de autenticidad, garantizando su origen y calidad.</p>
-                            <a href="https://wa.me/526622293879?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Certificación" class="btn btn-outline policy-link" data-policy="certificacion">Saber más</a>
+                            <a href="https://wa.me/526621383780?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Certificación" class="btn btn-outline policy-link" data-policy="certificacion">Saber más</a>
                         </div>
                         
                         <div class="policy-card animate-slide-up">
@@ -206,7 +232,7 @@
                             </div>
                             <h3>Envío Seguro</h3>
                             <p>Envíos gratuitos a todo México en compras mayores a $1,000 MXN. Envíos rápidos y seguros para proteger tu compra.</p>
-                            <a href="https://wa.me/526622293879?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Envío%20Seguro" class="btn btn-outline policy-link" data-policy="envio">Saber más</a>
+                            <a href="https://wa.me/526621383780?text=Hola!%20Vi%20su%20pagina%20web%20y%20quisiera%20saber%20más%20acerca%20de%20sus%20políticas%20de%20Envío%20Seguro" class="btn btn-outline policy-link" data-policy="envio">Saber más</a>
                         </div>
                     </div>
                 </div>
@@ -261,7 +287,7 @@
                                 <div class="contact-text">
                                     <h4>AMICI Concept Store</h4>
                                     <p>Av. Gaspar Luken Escalante 790, Residencial San Marcos, Puerta Real, 83177 Hermosillo, Son.</p>
-                                    <a href="https://maps.app.goo.gl/EJQBZydmCw3ErYAh8" target="_blank">Ver en Google Maps</a>
+                                    <a href="https://share.google/AP7AedFZLasbvoCQr" target="_blank" rel="noopener noreferrer">Ver en Google Maps</a>
                                 </div>
                             </div>
                             <div class="contact-item animate-slide-up">
@@ -279,8 +305,8 @@
                                 </div>
                                 <div class="contact-text">
                                     <h4>Contacto</h4>
-                                    <a href="https://wa.me/526622293879" target="_blank">Enviar mensaje por WhatsApp</a>
-                                    <p>+52 662 229 3879<br><a href="mailto:smperfumesarabes@gmail.com">smperfumesarabes@gmail.com</a></p>
+                                    <a href="https://wa.me/526621383780" target="_blank">Enviar mensaje por WhatsApp</a>
+                                    <p>+52 6621 38 37 80<br><a href="mailto:smperfumesarabes@gmail.com">smperfumesarabes@gmail.com</a></p>
                                 </div>
                             </div>
                             <div class="contact-item animate-slide-up">
@@ -322,9 +348,13 @@
                         </div>
                     </div>
                     
-                    <div class="map-container animate-slide-up">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3485.4453385064357!2d-111.0349187244812!3d29.122052275401035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86ce81a26e6b1531%3A0xdaa8fdc3f05143d1!2sAMICI%20CONCEPT%20STORE!5e0!3m2!1sen!2smx!4v1754241472250!5m2!1sen!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                    <a class="map-container map-link animate-slide-up" href="https://share.google/AP7AedFZLasbvoCQr" target="_blank" rel="noopener noreferrer">
+                        <div class="map-link-content">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <h3>Nuestra ubicación</h3>
+                            <p>Toca para abrir en Google Maps</p>
+                        </div>
+                    </a>
                 </div>
             </section>
         </div>
@@ -351,10 +381,10 @@
                     </div>
                     <div class="social-links">
                         <a href="https://www.instagram.com/sm.perfumesarabes" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/526622293879" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/526621383780" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                     <div class="copyright">
-                        &copy; 2025 SM Perfumes Árabes. Todos los derechos reservados.
+                        &copy; 2026 SM Perfumes Árabes. Todos los derechos reservados.
                     </div>
                 </div>
             </div>
@@ -384,7 +414,7 @@
             </div>
         </div>
 
-        <a href="https://wa.me/526622293879" target="_blank" class="whatsapp-btn">
+        <a href="https://wa.me/526621383780" target="_blank" class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>

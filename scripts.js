@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function init() {
         loadProducts();
         setupEventListeners();
+        setupHeroVideoControls();
         updateCartCount();
         showScreen(currentScreen);
         
@@ -456,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 message += "%0A%0A*Nota: Los productos marcados con 'DECANT' son fragancias en formato de 30ml.*";
             }
 
-            window.open(`https://wa.me/526622293879?text=${message}`, '_blank');
+            window.open(`https://wa.me/526621383780?text=${message}`, '_blank');
         });
         
         whatsappBtn.addEventListener('click', function() {
@@ -541,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const whatsappMessage = `*Solicitud de Cita Privada*%0A%0A*Nombre:* ${name}%0A*Email:* ${email}%0A*Teléfono:* ${phone}%0A*Fecha Preferida:* ${date}%0A*Interés Especial:* ${message}`;
                 
-                window.open(`https://wa.me/526622293879?text=${whatsappMessage}`, '_blank');
+                window.open(`https://wa.me/526621383780?text=${whatsappMessage}`, '_blank');
                 this.reset();
                 alert('¡Gracias! Hemos recibido tu solicitud de cita.');
             });
@@ -568,8 +569,60 @@ document.addEventListener('DOMContentLoaded', function() {
         if (screenId === 'perfumes') {
             filterProducts();
         }
+
+        syncHeroVideo(screenId === 'home');
         
         window.scrollTo(0, 0);
+    }
+
+    function syncHeroVideo(shouldPlay) {
+        const video = document.getElementById('hero-video');
+        if (!video) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!shouldPlay || prefersReducedMotion) {
+            video.pause();
+            return;
+        }
+
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {});
+        }
+    }
+
+    function setupHeroVideoControls() {
+        const video = document.getElementById('hero-video');
+        const soundBtn = document.getElementById('hero-sound');
+        if (!video || !soundBtn) return;
+
+        const icon = soundBtn.querySelector('i');
+
+        soundBtn.addEventListener('click', function() {
+            video.muted = !video.muted;
+            soundBtn.setAttribute('aria-pressed', String(!video.muted));
+            soundBtn.setAttribute(
+                'aria-label',
+                video.muted ? 'Activar sonido del video' : 'Silenciar video'
+            );
+
+            if (icon) {
+                icon.className = video.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+            }
+
+            if (video.paused) {
+                syncHeroVideo(currentScreen === 'home');
+            }
+        });
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                video.pause();
+            } else if (currentScreen === 'home') {
+                syncHeroVideo(true);
+            }
+        });
     }
     
     function filterProducts() {
