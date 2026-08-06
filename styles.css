@@ -287,19 +287,6 @@ nav ul li a:hover::after {
     max-width: 680px;
 }
 
-.hero-brand {
-    display: inline-block;
-    margin: 0 0 18px;
-    font-size: clamp(2.8rem, 7vw, 5.2rem);
-    font-weight: 700;
-    line-height: 0.9;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--white);
-    text-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-    animation-delay: 0.05s;
-}
-
 .hero h1 {
     font-size: clamp(2.4rem, 5.6vw, 4.5rem);
     line-height: 1.05;
@@ -307,7 +294,7 @@ nav ul li a:hover::after {
     color: var(--white);
     letter-spacing: -1px;
     text-wrap: balance;
-    animation-delay: 0.18s;
+    animation-delay: 0.08s;
 }
 
 .hero-content > p {
@@ -945,45 +932,6 @@ textarea.form-control {
     border: none;
 }
 
-a.map-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--white);
-    background:
-        linear-gradient(135deg, rgba(0, 0, 0, 0.72), rgba(40, 40, 40, 0.78)),
-        url('./img/banner.png') center/cover no-repeat;
-    transition: var(--transition);
-}
-
-a.map-link:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
-}
-
-.map-link-content {
-    text-align: center;
-    padding: 24px;
-}
-
-.map-link-content i {
-    font-size: 42px;
-    margin-bottom: 16px;
-    color: var(--light-silver);
-}
-
-.map-link-content h3 {
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: var(--white);
-}
-
-.map-link-content p {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.85);
-}
-
 .footer-space {
     height: 120px;
     background: var(--white);
@@ -1467,8 +1415,14 @@ footer {
 }
 
 @media (max-width: 768px) {
+    html,
+    body {
+        background: var(--black);
+    }
+
     body {
         padding-top: 60px;
+        padding-bottom: 0;
     }
 
     header {
@@ -1497,8 +1451,17 @@ footer {
     .app-container {
         padding-top: 20px;
         margin-top: 60px;
-        margin-bottom: 20px;
+        margin-bottom: 0;
         background-color: var(--light-gray);
+    }
+
+    .footer-space {
+        display: none;
+    }
+
+    footer {
+        margin-bottom: 0;
+        padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
     }
 
     .header-container {
@@ -1545,11 +1508,6 @@ footer {
     .hero-content {
         max-width: 100%;
         text-align: left;
-    }
-
-    .hero-brand {
-        margin-bottom: 14px;
-        letter-spacing: 0.14em;
     }
 
     .hero-content > p {
